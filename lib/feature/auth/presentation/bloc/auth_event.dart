@@ -7,7 +7,8 @@ final class LoginEvent extends AuthEvent {
   final String email;
   final String password;
 
-  LoginEvent(this.email, this.password);
+  LoginEvent({
+    required this.email,
+    required this.password,
+  });
 }
-
-

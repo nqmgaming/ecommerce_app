@@ -12,11 +12,9 @@ abstract interface class AuthRemoteDataSource {
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final _dio = Dio();
 
-  // use dio
   @override
   Future<UserModel> login(String email, String password) async {
-    const url =
-        '${AppsConstant.baseUrl}auth/login'; // Replace with your API endpoint
+    const url = '${AppsConstant.baseUrl}auth/login';
     try {
       final response = await _dio.post(
         url,
@@ -26,17 +24,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         ),
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         return UserModel.fromJson(response.data);
       } else {
         throw Exception('Failed to login: ${response.statusCode}');
       }
     } on DioException catch (e) {
       if (e.response != null) {
-        print('Failed to login: ${e.response?.statusCode} ${e.response?.data}');
         throw Failure(message: e.response?.data['message']);
       } else {
-        print('Failed to login: ${e.message}');
         throw Failure(message: e.message.toString());
       }
     }
