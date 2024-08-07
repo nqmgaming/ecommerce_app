@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 class AuthButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String title;
+  final bool isLoading;
 
   const AuthButton({
     super.key,
     required this.onPressed,
     required this.title,
+    this.isLoading = false,
   });
 
   @override
@@ -24,15 +26,22 @@ class AuthButton extends StatelessWidget {
           backgroundColor: const Color.fromRGBO(45, 32, 28, 1),
           foregroundColor: Colors.white,
         ),
-        onPressed: onPressed,
-        child: Text(
-          title.toUpperCase(),
-          style: const TextStyle(
-            color: Colors.white,
-            fontFamily: FontConstants.productSansRegular,
-            fontSize: 16,
-          ),
-        ),
+        onPressed: isLoading ? null : onPressed,
+        child: isLoading
+            ? const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              )
+            : Text(
+                title.toUpperCase(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontFamily: FontConstants.productSansRegular,
+                  fontSize: 16,
+                ),
+              ),
       ),
     );
   }

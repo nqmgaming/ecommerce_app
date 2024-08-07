@@ -19,6 +19,7 @@ class AuthTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
+      cursorColor: Colors.black,
       decoration: InputDecoration(
         hintStyle: TextStyle(
             color: Colors.black.withOpacity(0.8),
@@ -38,6 +39,7 @@ class AuthTextField extends StatelessWidget {
           borderSide: BorderSide(color: Colors.red),
         ),
       ),
+      textInputAction: TextInputAction.next,
       validator: validator,
     );
   }

@@ -14,7 +14,7 @@ void main() async {
   const secureStorage = FlutterSecureStorage();
   final accessToken = await secureStorage.read(key: 'access_token');
 
-  runApp(MyApp(isLoggedIn: accessToken != null));
+  runApp(MyApp(isLoggedIn: accessToken == null));
 }
 
 class MyApp extends StatelessWidget {
