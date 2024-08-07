@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class BlurButton extends StatelessWidget {
   final VoidCallback onPressed;
-  final title;
+  final String title;
 
   const BlurButton({super.key, required this.onPressed, required this.title});
 

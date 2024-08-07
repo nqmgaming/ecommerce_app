@@ -14,13 +14,10 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
-          image: const AssetImage(ImageConstant.welcome),
+          image: AssetImage(ImageConstant.welcome),
           fit: BoxFit.cover,
-          onError: (exception, stackTrace) {
-            print('Image not found');
-          },
           opacity: 0.5,
         ),
       ),

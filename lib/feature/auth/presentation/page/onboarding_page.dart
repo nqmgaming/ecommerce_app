@@ -31,12 +31,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
     bool? seen = prefs.getBool('onboarding_seen');
 
     if (seen ?? false) {
-      if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          LoginPage.route(),
-        );
-      }
+      _checkMounted();
+    }
+  }
+
+  void _checkMounted() {
+    if (mounted) {
+      Navigator.pushReplacement(
+        context,
+        LoginPage.route(),
+      );
     }
   }
 
@@ -133,14 +137,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
                       _buildPages().length,
-                          (index) => AnimatedContainer(
+                      (index) => AnimatedContainer(
                         duration: const Duration(milliseconds: 300),
                         margin: const EdgeInsets.symmetric(horizontal: 5),
                         height: 10,
                         width: _currentPage == index ? 20 : 10,
                         decoration: BoxDecoration(
                           color:
-                          _currentPage == index ? Colors.blue : Colors.grey,
+                              _currentPage == index ? Colors.blue : Colors.grey,
                           borderRadius: BorderRadius.circular(5),
                         ),
                       ),
@@ -150,12 +154,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   BlurButton(
                       onPressed: () async {
                         await _setOnboardingSeen();
-                        if (mounted) {
-                          Navigator.pushReplacement(
-                            context,
-                            LoginPage.route(),
-                          );
-                        }
+                        _checkMounted();
                       },
                       title: "Shopping Now")
                 ],
