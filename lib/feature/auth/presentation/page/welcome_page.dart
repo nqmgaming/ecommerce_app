@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/core/constants/fonts_constant.dart';
 import 'package:ecommerce_app/core/constants/images_constant.dart';
-import 'package:ecommerce_app/feature/auth/presentation/onboarding_page.dart';
+import 'package:ecommerce_app/feature/auth/presentation/page/onboarding_page.dart';
 import 'package:ecommerce_app/feature/auth/presentation/widget/blur_button.dart';
 import 'package:flutter/material.dart';
 
