@@ -2,11 +2,13 @@ import 'package:ecommerce_app/core/constants/apps_constant.dart';
 import 'package:ecommerce_app/core/error/failure.dart';
 import 'package:ecommerce_app/feature/auth/data/model/user_model.dart';
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
 abstract interface class AuthRemoteDataSource {
   Future<UserModel> login(String email, String password);
 }
 
+@LazySingleton(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final _dio = Dio();
 

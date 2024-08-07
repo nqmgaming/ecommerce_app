@@ -3,7 +3,9 @@ import 'package:ecommerce_app/feature/auth/data/datasource/auth_remote_data_sour
 import 'package:ecommerce_app/feature/auth/domain/entities/user_entity.dart';
 import 'package:ecommerce_app/feature/auth/domain/repository/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource _authRemoteDataSource;
 

@@ -1,9 +1,12 @@
 import 'package:ecommerce_app/feature/auth/presentation/page/login_page.dart';
 import 'package:ecommerce_app/feature/auth/presentation/page/welcome_page.dart';
+import 'package:ecommerce_app/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
   runApp(const MyApp());
 }
 

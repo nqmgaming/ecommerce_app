@@ -3,7 +3,9 @@ import 'package:ecommerce_app/core/usecase/usecase.dart';
 import 'package:ecommerce_app/feature/auth/domain/entities/user_entity.dart';
 import 'package:ecommerce_app/feature/auth/domain/repository/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class Login implements UseCase<UserEntity, LoginParam> {
   final AuthRepository _authRepository;
 
