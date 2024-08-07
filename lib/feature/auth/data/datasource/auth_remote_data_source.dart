@@ -3,6 +3,7 @@ import 'package:ecommerce_app/core/error/failure.dart';
 import 'package:ecommerce_app/feature/auth/data/model/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 abstract interface class AuthRemoteDataSource {
   Future<UserModel> login(String email, String password);
@@ -11,6 +12,7 @@ abstract interface class AuthRemoteDataSource {
 @LazySingleton(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final _dio = Dio();
+  final _secureStorage = const FlutterSecureStorage();
 
   @override
   Future<UserModel> login(String email, String password) async {
@@ -25,7 +27,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
 
       if (response.statusCode == 201) {
-        return UserModel.fromJson(response.data);
+        final user = UserModel.fromJson(response.data);
+        if (user.assetToken != null && user.refreshToken != null) {
+          await _secureStorage.write(key: 'access_token', value: user.assetToken);
+          await _secureStorage.write(key: 'refresh_token', value: user.refreshToken);
+        } else {
+          throw Exception('Tokens are null');
+        }
+        return user;
       } else {
         throw Exception('Failed to login: ${response.statusCode}');
       }

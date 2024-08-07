@@ -9,8 +9,8 @@ class UserModel extends UserEntity {
     super.avatar,
     super.createdAt,
     super.updatedAt,
-    super.assetToken,
-    super.refreshToken,
+    required super.assetToken,
+    required super.refreshToken,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -20,11 +20,9 @@ class UserModel extends UserEntity {
       name: json['name'] as String?,
       role: json['role'] as String?,
       avatar: json['avatar'] as String?,
-      createdAt:
-          json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
-      updatedAt:
-          json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
-      assetToken: json['asset_token'] as String?,
+      createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
+      updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
+      assetToken: json['access_token'] as String?,
       refreshToken: json['refresh_token'] as String?,
     );
   }
@@ -38,7 +36,7 @@ class UserModel extends UserEntity {
       'avatar': avatar,
       'createdAt': createdAt?.toIso8601String(),
       'updatedAt': updatedAt?.toIso8601String(),
-      'asset_token': assetToken,
+      'access_token': assetToken,
       'refresh_token': refreshToken,
     };
   }
