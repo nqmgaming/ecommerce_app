@@ -2,8 +2,8 @@ class CategoryEntity {
   final int id;
   final String name;
   final String image;
-  final DateTime creationAt;
-  final DateTime updatedAt;
+  final String creationAt;
+  final String updatedAt;
 
   CategoryEntity({
     required this.id,

@@ -1,9 +1,10 @@
-import 'package:ecommerce_app/feature/app/presentation/page/cart_page.dart';
-import 'package:ecommerce_app/feature/app/presentation/page/home_page.dart';
-import 'package:ecommerce_app/feature/app/presentation/page/notification_page.dart';
-import 'package:ecommerce_app/feature/app/presentation/page/profile_page.dart';
+import 'package:ecommerce_app/feature/app/presentation/page/profile/page/profile_page.dart';
 import 'package:ecommerce_app/feature/app/presentation/widget/custom_bottom_navigation_bar_item.dart';
 import 'package:flutter/material.dart';
+
+import 'cart/page/cart_page.dart';
+import 'home/page/home_page.dart';
+import 'notification/page/notification_page.dart';
 
 class AppPage extends StatefulWidget {
   static route() {
@@ -33,8 +34,12 @@ class _AppPageState extends State<AppPage> {
       const NotificationPage(),
       const ProfilePage()
     ];
+
     return Scaffold(
-      body: widgetOptions.elementAt(_selectedIndex),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: widgetOptions,
+      ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -86,9 +91,12 @@ class _AppPageState extends State<AppPage> {
             currentIndex: _selectedIndex,
             showSelectedLabels: false,
             onTap: _onItemTapped,
+            backgroundColor: Colors.white,
+            selectedItemColor: Colors.black,
           ),
         ),
       ),
+
     );
   }
 }

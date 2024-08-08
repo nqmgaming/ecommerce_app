@@ -28,7 +28,11 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
         for (var item in response.data) {
           categories.add(CategoryModel.fromJson(item));
         }
-        return categories;
+        return categories
+            .where((category) => category.name != 'Testing Category')
+            .where((category) => category.name != 'nisa')
+            .where((category) => category.name != 'hola')
+            .toList();
       } else {
         throw Exception('Failed to get categories: ${response.statusCode}');
       }

@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/feature/app/presentation/page/app_page.dart';
+import 'package:ecommerce_app/feature/app/presentation/page/home/bloc/home_bloc.dart';
 import 'package:ecommerce_app/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ecommerce_app/feature/auth/presentation/page/login_page.dart';
 import 'package:ecommerce_app/feature/auth/presentation/page/welcome_page.dart';
@@ -40,6 +41,9 @@ class MyApp extends StatelessWidget {
             providers: [
               BlocProvider<AuthBloc>(
                 create: (context) => getIt<AuthBloc>(),
+              ),
+              BlocProvider<HomeBloc>(
+                create: (context) => getIt<HomeBloc>(),
               ),
             ],
             child: MaterialApp(

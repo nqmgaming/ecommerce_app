@@ -33,7 +33,7 @@ class CustomBottomNavigationBarItem extends StatelessWidget {
             child: Icon(
               icon,
               color: isSelected ? Colors.white : Colors.black,
-              size: 18,
+              size: 24,
             ),
           ),
           const SizedBox(width: 6),

@@ -11,4 +11,30 @@ class ProductModel extends ProductEntity {
     required super.updatedAt,
     required super.category,
   });
+
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
+      id: json['id'],
+      title: json['title'],
+      price: json['price'],
+      description: json['description'],
+      images: json['images'],
+      creationAt: json['creationAt'],
+      updatedAt: json['updatedAt'],
+      category: json['category'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': super.id,
+      'title': super.title,
+      'price': super.price,
+      'description': super.description,
+      'images': super.images,
+      'creationAt': super.creationAt,
+      'updatedAt': super.updatedAt,
+      'category': super.category,
+    };
+  }
 }

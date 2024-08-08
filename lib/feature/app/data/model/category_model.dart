@@ -14,7 +14,7 @@ class CategoryModel extends CategoryEntity {
       id: json['id'],
       name: json['name'],
       image: json['image'],
-      creationAt: json['creationAt'],
+      creationAt: json['creationAt'] ,
       updatedAt: json['updatedAt'],
     );
   }
