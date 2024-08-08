@@ -1,7 +1,7 @@
+import 'package:ecommerce_app/feature/app/presentation/page/app_page.dart';
 import 'package:ecommerce_app/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ecommerce_app/feature/auth/presentation/page/login_page.dart';
 import 'package:ecommerce_app/feature/auth/presentation/page/welcome_page.dart';
-import 'package:ecommerce_app/feature/home/presentation/page/home_page.dart';
 import 'package:ecommerce_app/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               home: isLoggedIn
-                  ? const HomePage()
+                  ? const AppPage()
                   : (snapshot.hasData && snapshot.data == true
                       ? const LoginPage()
                       : const WelcomePage()),

@@ -1,10 +1,11 @@
 import 'package:ecommerce_app/core/common/widget/app_text_button.dart';
 import 'package:ecommerce_app/core/constants/fonts_constant.dart';
+import 'package:ecommerce_app/feature/app/presentation/page/app_page.dart';
 import 'package:ecommerce_app/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ecommerce_app/feature/auth/presentation/widget/auth_button.dart';
 import 'package:ecommerce_app/feature/auth/presentation/widget/auth_text_field.dart';
 import 'package:ecommerce_app/feature/auth/presentation/widget/social_button.dart';
-import 'package:ecommerce_app/feature/home/presentation/page/home_page.dart';
+import 'package:ecommerce_app/feature/app/presentation/page/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -54,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
 
               if (state is AuthLoaded) {
                 Navigator.pushAndRemoveUntil(
-                    context, HomePage.route(), (route) => false);
+                    context, AppPage.route(), (route) => false);
               }
             },
             builder: (context, state) {

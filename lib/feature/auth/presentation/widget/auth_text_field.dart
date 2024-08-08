@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AuthTextField extends StatelessWidget {
+class AuthTextField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
@@ -15,17 +15,30 @@ class AuthTextField extends StatelessWidget {
   });
 
   @override
+  State<AuthTextField> createState() => _AuthTextFieldState();
+}
+
+class _AuthTextFieldState extends State<AuthTextField> {
+  bool _passwordVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _passwordVisible = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
-      obscureText: obscureText,
+      controller: widget.controller,
+      obscureText: widget.obscureText ? !_passwordVisible : false,
       cursorColor: Colors.black,
       decoration: InputDecoration(
         hintStyle: TextStyle(
             color: Colors.black.withOpacity(0.8),
             fontSize: 14,
             fontWeight: FontWeight.w400),
-        hintText: hintText,
+        hintText: widget.hintText,
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.grey),
         ),
@@ -38,9 +51,22 @@ class AuthTextField extends StatelessWidget {
         focusedErrorBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.red),
         ),
+        suffixIcon: widget.obscureText
+            ? IconButton(
+                icon: Icon(
+                  _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _passwordVisible = !_passwordVisible;
+                  });
+                },
+              )
+            : null,
       ),
       textInputAction: TextInputAction.next,
-      validator: validator,
+      validator: widget.validator,
     );
   }
 }
