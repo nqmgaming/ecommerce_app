@@ -43,6 +43,12 @@ class MyApp extends StatelessWidget {
               ),
             ],
             child: MaterialApp(
+              theme: ThemeData(
+                appBarTheme: const AppBarTheme(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.white,
+                ),
+              ),
               debugShowCheckedModeBanner: false,
               home: isLoggedIn
                   ? const AppPage()
