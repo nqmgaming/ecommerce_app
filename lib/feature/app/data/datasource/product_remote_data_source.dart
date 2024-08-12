@@ -18,7 +18,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
 
   @override
   Future<ProductModel> getProduct(int id) async {
-    final url = "${AppsConstant.baseUrl}products${id}";
+    final url = "${AppsConstant.baseUrl}products$id";
     try {
       final response = await _dio.get(
         url,

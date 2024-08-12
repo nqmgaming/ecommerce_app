@@ -1,5 +1,4 @@
 import 'package:ecommerce_app/feature/app/data/model/category_model.dart';
-import 'package:ecommerce_app/feature/app/domain/entities/category_entity.dart';
 import 'package:ecommerce_app/feature/app/domain/entities/product_entity.dart';
 
 class ProductModel extends ProductEntity {

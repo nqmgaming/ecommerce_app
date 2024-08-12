@@ -109,7 +109,13 @@ class _HomePageState extends State<HomePage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  if (state is HomeLoaded) ...[
+                  if (state is HomeLoading) ...[
+                    const Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ] else if (state is HomeLoaded) ...[
                     GridView.builder(
                       padding: const EdgeInsets.all(0),
                       shrinkWrap: true,
@@ -143,25 +149,30 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.black.withOpacity(0.5),
                               ),
                               child: Center(
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        category.icon,
-                                        color: Colors.white,
-                                        size: 40,
-                                      ),
-                                      Text(
-                                        category.name,
-                                        style: const TextStyle(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          category.icon,
                                           color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
+                                          size: 40,
                                         ),
-                                      ),
-                                    ]),
+                                        Text(
+                                          category.name,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ]),
+                                ),
                               ),
                             ),
                           ),

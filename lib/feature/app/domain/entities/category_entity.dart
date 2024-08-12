@@ -17,11 +17,11 @@ class CategoryEntity {
 
   IconData get icon {
     switch (name.toLowerCase()) {
-      case 'annisa':
+      case 'clothes':
         return Icons.checkroom;
       case 'electronics':
         return Icons.electrical_services;
-      case 'arcilik':
+      case 'furniture':
         return Icons.chair;
       case 'shoes':
         return Icons.shopping_bag;
