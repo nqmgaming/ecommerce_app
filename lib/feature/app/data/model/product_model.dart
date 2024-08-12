@@ -1,3 +1,5 @@
+import 'package:ecommerce_app/feature/app/data/model/category_model.dart';
+import 'package:ecommerce_app/feature/app/domain/entities/category_entity.dart';
 import 'package:ecommerce_app/feature/app/domain/entities/product_entity.dart';
 
 class ProductModel extends ProductEntity {
@@ -18,10 +20,11 @@ class ProductModel extends ProductEntity {
       title: json['title'],
       price: json['price'],
       description: json['description'],
-      images: json['images'],
+      images: List<String>.from(json['images']),
       creationAt: json['creationAt'],
       updatedAt: json['updatedAt'],
-      category: json['category'],
+      category: CategoryModel.fromJson(
+          json['category']), // Correctly cast to CategoryEntity
     );
   }
 
@@ -34,7 +37,8 @@ class ProductModel extends ProductEntity {
       'images': super.images,
       'creationAt': super.creationAt,
       'updatedAt': super.updatedAt,
-      'category': super.category,
+      'category': (super.category as CategoryModel).toJson(),
+      // Convert to JSON
     };
   }
 }

@@ -20,3 +20,17 @@ final class HomeError extends HomeState {
 }
 
 final class HomeNoResults extends HomeState {}
+
+final class ProductLoaded extends HomeState {
+  final List<ProductEntity> products;
+
+  ProductLoaded(this.products);
+}
+
+final class ProductError extends HomeState {
+  final String message;
+
+  ProductError(this.message);
+}
+
+final class ProductNoResults extends HomeState {}

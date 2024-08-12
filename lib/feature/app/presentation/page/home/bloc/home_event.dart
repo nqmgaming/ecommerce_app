@@ -12,3 +12,11 @@ final class HomeSearchCategories extends HomeEvent {
     required this.query,
   });
 }
+
+final class ProductPageLoad extends HomeEvent {
+  final int categoryId;
+
+  ProductPageLoad({
+    required this.categoryId,
+  });
+}

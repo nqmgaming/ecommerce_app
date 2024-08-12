@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/feature/app/presentation/page/home/bloc/home_bloc.dart';
+import 'package:ecommerce_app/feature/app/presentation/page/home/page/products_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,7 +25,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onSearchChanged() {
-    context.read<HomeBloc>().add(HomeSearchCategories(query: _searchController.text));
+    context
+        .read<HomeBloc>()
+        .add(HomeSearchCategories(query: _searchController.text));
   }
 
   @override
@@ -64,11 +67,41 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
+        actions: [
+          Container(
+            margin: const EdgeInsets.only(right: 20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  spreadRadius: 0,
+                  blurRadius: 3,
+                ),
+              ],
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.filter_list),
+              color: Colors.black,
+              onPressed: () {
+                // Navigator.of(context).push(CartPage.route());
+              },
+            ),
+          ),
+        ],
       ),
       backgroundColor: Colors.white,
       body: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {
-          // TODO: implement listener
+          if (state is HomeError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
         },
         builder: (context, state) {
           return Padding(
@@ -83,34 +116,52 @@ class _HomePageState extends State<HomePage> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: state.categories.length,
                       gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 3.5 / 4,
                       ),
                       itemBuilder: (context, index) {
                         final category = state.categories[index];
-                        return Container(
-                          margin: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(category.image),
-                              fit: BoxFit.cover,
-                            ),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              ProductsPage.route(categoryEntity: category),
+                            );
+                          },
                           child: Container(
+                            margin: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(category.image),
+                                fit: BoxFit.cover,
+                              ),
                               borderRadius: BorderRadius.circular(15),
-                              color: Colors.black.withOpacity(0.5),
                             ),
-                            child: Center(
-                              child: Text(
-                                category.name,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.black.withOpacity(0.5),
+                              ),
+                              child: Center(
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        category.icon,
+                                        color: Colors.white,
+                                        size: 40,
+                                      ),
+                                      Text(
+                                        category.name,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ]),
                               ),
                             ),
                           ),

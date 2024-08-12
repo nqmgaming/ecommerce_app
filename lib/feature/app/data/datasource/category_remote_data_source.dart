@@ -32,6 +32,7 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
             .where((category) => category.name != 'Testing Category')
             .where((category) => category.name != 'nisa')
             .where((category) => category.name != 'hola')
+            .where((category) => category.name != 'Kaca')
             .toList();
       } else {
         throw Exception('Failed to get categories: ${response.statusCode}');

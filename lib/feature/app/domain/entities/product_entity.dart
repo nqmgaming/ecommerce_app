@@ -6,8 +6,8 @@ class ProductEntity {
   final int price;
   final String description;
   final List<String> images;
-  final DateTime creationAt;
-  final DateTime updatedAt;
+  final String creationAt;
+  final String updatedAt;
   final CategoryEntity category;
 
   ProductEntity({
