@@ -93,6 +93,12 @@ class _HomePageState extends State<HomePage> {
       ),
       backgroundColor: Colors.white,
       body: BlocConsumer<HomeBloc, HomeState>(
+        buildWhen: (previous, current) {
+          if (previous is HomeLoaded && current is HomeLoaded) {
+            return previous.categories != current.categories;
+          }
+          return true;
+        },
         listener: (context, state) {
           if (state is HomeError) {
             ScaffoldMessenger.of(context).showSnackBar(
