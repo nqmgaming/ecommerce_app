@@ -30,6 +30,8 @@ class _ProductsPageState extends State<ProductsPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        elevation: 10,
+        surfaceTintColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           color: Colors.black,

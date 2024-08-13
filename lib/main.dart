@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/feature/app/presentation/page/app_page.dart';
+import 'package:ecommerce_app/feature/app/presentation/page/cart/bloc/cart_bloc.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/home/bloc/home_bloc.dart';
 import 'package:ecommerce_app/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ecommerce_app/feature/auth/presentation/page/login_page.dart';
@@ -14,6 +15,7 @@ void main() async {
   configureDependencies();
   const secureStorage = FlutterSecureStorage();
   final accessToken = await secureStorage.read(key: 'access_token');
+  print(accessToken);
 
   runApp(MyApp(isLoggedIn: accessToken != null));
 }
@@ -45,6 +47,7 @@ class MyApp extends StatelessWidget {
               BlocProvider<HomeBloc>(
                 create: (context) => getIt<HomeBloc>(),
               ),
+              BlocProvider<CartBloc>(create: (context) => getIt<CartBloc>()),
             ],
             child: MaterialApp(
               theme: ThemeData(
