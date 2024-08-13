@@ -13,6 +13,12 @@ final class AuthLoaded extends AuthState {
   AuthLoaded(this.userEntity);
 }
 
+final class AuthGetUserInfo extends AuthState {
+  final UserEntity userEntity;
+
+  AuthGetUserInfo(this.userEntity);
+}
+
 final class AuthError extends AuthState {
   final String message;
 

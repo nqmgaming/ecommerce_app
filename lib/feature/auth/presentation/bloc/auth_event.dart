@@ -12,3 +12,11 @@ final class LoginEvent extends AuthEvent {
     required this.password,
   });
 }
+
+final class GetUserInfoEvent extends AuthEvent {
+  final String session;
+
+  GetUserInfoEvent({
+    required this.session,
+  });
+}

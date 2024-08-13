@@ -21,4 +21,14 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(e);
     }
   }
+
+  @override
+  Future<Either<Failure, UserEntity>> getUserWithSession(String session) async {
+    try {
+      final user = await _authRemoteDataSource.getUserWithSession(session);
+      return Right(user);
+    } on Failure catch (e) {
+      return Left(e);
+    }
+  }
 }
