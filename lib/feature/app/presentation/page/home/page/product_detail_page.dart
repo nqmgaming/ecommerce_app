@@ -130,6 +130,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         return Image.network(
                           widget.product.images[index],
                           fit: BoxFit.cover,
+                          scale: 1.0,
                         );
                       },
                       layout: SwiperLayout.DEFAULT,
@@ -228,7 +229,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       topRight: Radius.circular(30),
                     ),
                   ),
-                  child: Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(5),
                     child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: Column(
@@ -547,7 +549,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 size: _sizeSelected!,
                                 color: _colorSelected.toString(),
                               );
-
+                              BlocProvider.of<CartBloc>(context)
+                                  .add(AddCart(cart));
                             } else {
                               _showAlertDialog(
                                 context,

@@ -32,6 +32,10 @@ class _AuthTextFieldState extends State<AuthTextField> {
     return TextFormField(
       controller: widget.controller,
       obscureText: widget.obscureText ? !_passwordVisible : false,
+      obscuringCharacter: '*',
+      onTapOutside: (_) {
+        FocusScope.of(context).unfocus();
+      },
       cursorColor: Colors.black,
       decoration: InputDecoration(
         hintStyle: TextStyle(
