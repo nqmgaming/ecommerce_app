@@ -1,5 +1,5 @@
 import 'package:ecommerce_app/core/error/failure.dart';
-import 'package:ecommerce_app/feature/app/data/datasource/category_remote_data_source.dart';
+import 'package:ecommerce_app/feature/app/data/datasource/remote/category_remote_data_source.dart';
 import 'package:ecommerce_app/feature/app/domain/entities/category_entity.dart';
 import 'package:ecommerce_app/feature/app/domain/repositories/category_repository.dart';
 import 'package:fpdart/fpdart.dart';
