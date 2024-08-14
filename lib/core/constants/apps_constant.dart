@@ -1,3 +1,3 @@
 class AppsConstant {
-  static const String baseUrl = 'https://api.escuelajs.co/api/v1/';
+  static const String baseUrl = 'https://fake-api-backend-1.onrender.com/api/v1/';
 }

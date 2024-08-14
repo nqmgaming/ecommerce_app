@@ -1,19 +1,20 @@
-import 'package:ecommerce_app/feature/app/data/model/cart_model.dart';
+import 'package:uuid/uuid.dart';
 
 class CartEntity {
   final String id;
+
   final String userId;
   final String productId;
   final int quantity;
   final String size;
   final String color;
 
-  const CartEntity({
-    required this.id,
+  CartEntity({
     required this.userId,
     required this.productId,
     required this.quantity,
     required this.size,
     required this.color,
-  });
+    String? id,
+  }) : id = id ?? const Uuid().v4();
 }

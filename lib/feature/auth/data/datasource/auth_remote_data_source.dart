@@ -68,8 +68,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       if (response.statusCode == 200) {
         final userModel = UserModel.fromJson(response.data);
         // save user data to local storage
-        await _secureStorage.write(
-            key: 'userId', value: userModel.id.toString());
+        await _secureStorage.write(key: 'userId', value: userModel.id.toString());
         await _secureStorage.write(key: 'email', value: userModel.email);
         await _secureStorage.write(key: 'name', value: userModel.name);
         await _secureStorage.write(key: 'avatar', value: userModel.avatar);

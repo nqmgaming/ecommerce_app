@@ -40,7 +40,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final result = await _getUserInfo(GetUserInfoParam(session: event.session));
     result.fold(
       (failure) => emit(AuthError(failure.message)),
-      (user) => emit(AuthLoaded(user)),
+      (user) => emit(AuthGetUserInfo(user)),
     );
   }
 }

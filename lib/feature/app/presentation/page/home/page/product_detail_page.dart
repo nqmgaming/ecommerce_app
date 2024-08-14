@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class ProductDetailPage extends StatefulWidget {
   static route({required ProductEntity product}) {
@@ -36,7 +37,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   ];
   Color? _colorSelected;
   bool _isFavorite = false;
-  CartEntity? _cart;
+  int? _userId;
 
   void _showAlertDialog(BuildContext context, String message, Function onOk) {
     showCupertinoDialog(
@@ -57,6 +58,19 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         );
       },
     );
+  }
+
+  void getUserIdFromSecureStorage() async {
+    final userId = await const FlutterSecureStorage().read(key: 'userId');
+    setState(() {
+      _userId = int.parse(userId!);
+    });
+  }
+
+  @override
+  void initState() {
+    getUserIdFromSecureStorage();
+    super.initState();
   }
 
   @override
@@ -106,9 +120,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             _showAlertDialog(
               context,
               "Product added to cart",
-              () {
-                Navigator.pop(context);
-              },
+              () {},
             );
           }
         },
@@ -542,8 +554,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             if (_sizeSelected != null &&
                                 _colorSelected != null) {
                               final cart = CartEntity(
-                                id: "",
-                                userId: "1",
+                                userId: _userId.toString(),
                                 productId: widget.product.id.toString(),
                                 quantity: _cartCount,
                                 size: _sizeSelected!,

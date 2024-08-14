@@ -31,4 +31,9 @@ class CartModel extends CartEntity {
       'color': color,
     };
   }
+
+  @override
+  String toString() {
+    return 'CartModel{id: $id, userId: $userId, productId: $productId, quantity: $quantity, size: $size, color: $color}';
+  }
 }

@@ -1,7 +1,6 @@
 import 'package:ecommerce_app/feature/app/presentation/page/app_page.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/cart/bloc/cart_bloc.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/home/bloc/home_bloc.dart';
-import 'package:ecommerce_app/feature/app/presentation/page/home/page/home_page.dart';
 import 'package:ecommerce_app/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ecommerce_app/feature/auth/presentation/page/login_page.dart';
 import 'package:ecommerce_app/feature/auth/presentation/page/welcome_page.dart';
@@ -16,8 +15,6 @@ void main() async {
   configureDependencies();
   const secureStorage = FlutterSecureStorage();
   final accessToken = await secureStorage.read(key: 'access_token');
-  print(accessToken);
-
   runApp(MyApp(isLoggedIn: accessToken != null));
 }
 
@@ -34,45 +31,45 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      return FutureBuilder<bool>(
-        future: _checkOnboardingSeen(),
-        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const MaterialApp(
-              home: Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(),
+    return FutureBuilder<bool>(
+      future: _checkOnboardingSeen(),
+      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          );
+        } else {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider<AuthBloc>(
+                create: (context) => getIt<AuthBloc>(),
+              ),
+              BlocProvider<HomeBloc>(
+                create: (context) => getIt<HomeBloc>(),
+              ),
+              BlocProvider<CartBloc>(create: (context) => getIt<CartBloc>()),
+            ],
+            child: MaterialApp(
+              theme: ThemeData(
+                appBarTheme: const AppBarTheme(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.white,
                 ),
               ),
-            );
-          } else {
-            return MultiBlocProvider(
-              providers: [
-                BlocProvider<AuthBloc>(
-                  create: (context) => getIt<AuthBloc>(),
-                ),
-                BlocProvider<HomeBloc>(
-                  create: (context) => getIt<HomeBloc>(),
-                ),
-                BlocProvider<CartBloc>(create: (context) => getIt<CartBloc>()),
-              ],
-              child: MaterialApp(
-                theme: ThemeData(
-                  appBarTheme: const AppBarTheme(
-                    backgroundColor: Colors.white,
-                    foregroundColor: Colors.white,
-                  ),
-                ),
-                debugShowCheckedModeBanner: false,
-                home: isLoggedIn
-                    ? const AppPage()
-                    : (snapshot.hasData && snapshot.data == true
-                        ? const LoginPage()
-                        : const WelcomePage()),
-              ),
-            );
-          }
-        },
-      );
+              debugShowCheckedModeBanner: false,
+              home: isLoggedIn
+                  ? const AppPage()
+                  : (snapshot.hasData && snapshot.data == true
+                      ? const LoginPage()
+                      : const WelcomePage()),
+            ),
+          );
+        }
+      },
+    );
   }
 }

@@ -53,8 +53,16 @@ class _LoginPageState extends State<LoginPage> {
             }
 
             if (state is AuthLoaded) {
-              Navigator.pushAndRemoveUntil(
-                  context, AppPage.route(), (route) => false);
+              // get user info
+              BlocProvider.of<AuthBloc>(context).add(
+                GetUserInfoEvent(session: state.userEntity.assetToken!),
+              );
+            }
+            if (state is AuthGetUserInfo) {
+              Navigator.pushReplacement(
+                context,
+                AppPage.route(),
+              );
             }
           },
           builder: (context, state) {
@@ -85,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                       validator: (value) {
                         // regex for email validation
                         final emailRegex = RegExp(
-                            r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$');
+                            r'^.+@[a-zA-Z]+\.[a-zA-Z]+(\.?[a-zA-Z]+)$');
                         if (value!.isEmpty) {
                           return "Email is required";
                         } else if (!emailRegex.hasMatch(value)) {
