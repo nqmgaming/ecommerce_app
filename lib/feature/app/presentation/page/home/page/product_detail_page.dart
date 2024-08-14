@@ -2,11 +2,13 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:ecommerce_app/feature/app/domain/entities/cart_entity.dart';
 import 'package:ecommerce_app/feature/app/domain/entities/product_entity.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/cart/bloc/cart_bloc.dart';
+import 'package:ecommerce_app/feature/app/presentation/widget/increase_decrease_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:uuid/uuid.dart';
 
 class ProductDetailPage extends StatefulWidget {
   static route({required ProductEntity product}) {
@@ -120,6 +122,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             _showAlertDialog(
               context,
               "Product added to cart",
+              () {},
+            );
+          }
+          if (state is CartError) {
+            _showAlertDialog(
+              context,
+              "Failed to add product to cart",
               () {},
             );
           }
@@ -313,48 +322,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               ),
                               Column(
                                 children: [
-                                  Container(
-                                    height: 40,
-                                    padding: const EdgeInsets.all(5),
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey.shade200,
-                                      borderRadius: BorderRadius.circular(40),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        IconButton(
-                                          icon: const Icon(
-                                            Icons.remove,
-                                            size: 14,
-                                          ),
-                                          onPressed: () {
-                                            setState(() {
-                                              if (_cartCount > 0) {
-                                                _cartCount--;
-                                              }
-                                            });
-                                          },
-                                        ),
-                                        Text(
-                                          "$_cartCount",
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        IconButton(
-                                          icon: const Icon(
-                                            Icons.add,
-                                            size: 14,
-                                          ),
-                                          onPressed: () {
-                                            setState(() {
-                                              _cartCount++;
-                                            });
-                                          },
-                                        ),
-                                      ],
-                                    ),
+                                  IncreaseDecreaseButton(
+                                    initialValue: _cartCount,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        _cartCount = newValue;
+                                      });
+                                    },
                                   ),
                                   const SizedBox(
                                     height: 15,
@@ -554,6 +528,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             if (_sizeSelected != null &&
                                 _colorSelected != null) {
                               final cart = CartEntity(
+                                id: const Uuid().v4(),
                                 userId: _userId.toString(),
                                 productId: widget.product.id.toString(),
                                 productName: widget.product.title,

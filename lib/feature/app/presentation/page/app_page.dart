@@ -30,7 +30,7 @@ class _AppPageState extends State<AppPage> {
   Widget build(BuildContext context) {
     List<Widget> widgetOptions = [
       const HomePage(),
-      CartPage(),
+      const CartPage(),
       const NotificationPage(),
       const ProfilePage()
     ];
@@ -42,6 +42,7 @@ class _AppPageState extends State<AppPage> {
       ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
+          color: Colors.white,
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(30), topLeft: Radius.circular(30)),
           boxShadow: [

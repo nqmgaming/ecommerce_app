@@ -92,27 +92,32 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       backgroundColor: Colors.white,
-      body: BlocConsumer<HomeBloc, HomeState>(
-        buildWhen: (previous, current) {
-          if (previous is HomeLoaded && current is HomeLoaded) {
-            return previous.categories != current.categories;
-          }
-          return true;
+      body: RefreshIndicator(
+        color: Colors.black,
+        backgroundColor: Colors.white,
+        onRefresh: () async {
+          context.read<HomeBloc>().add(HomeLoadCategories());
         },
-        listener: (context, state) {
-          if (state is HomeError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-                backgroundColor: Colors.red,
-              ),
-            );
-          }
-        },
-        builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: SingleChildScrollView(
+        child: BlocConsumer<HomeBloc, HomeState>(
+          buildWhen: (previous, current) {
+            if (previous is HomeLoaded && current is HomeLoaded) {
+              return previous.categories != current.categories;
+            }
+            return true;
+          },
+          listener: (context, state) {
+            if (state is HomeError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.message),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            }
+          },
+          builder: (context, state) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Column(
                 children: [
                   if (state is HomeLoading) ...[
@@ -125,7 +130,6 @@ class _HomePageState extends State<HomePage> {
                     GridView.builder(
                       padding: const EdgeInsets.all(0),
                       shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: state.categories.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
@@ -198,9 +202,9 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ],
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

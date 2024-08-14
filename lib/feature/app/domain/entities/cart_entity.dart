@@ -1,5 +1,3 @@
-import 'package:uuid/uuid.dart';
-
 class CartEntity {
   final String id;
   final String userId;
@@ -12,8 +10,10 @@ class CartEntity {
   final int quantity;
   final String size;
   final String color;
+  final DateTime createdAt;
 
   CartEntity({
+    required this.id,
     required this.userId,
     required this.productId,
     required this.productName,
@@ -24,7 +24,6 @@ class CartEntity {
     required this.quantity,
     required this.size,
     required this.color,
-    String? id,
-  }) : id = id ?? const Uuid().v4();
-
+    DateTime? createdAt,
+  }) : createdAt = createdAt ?? DateTime.now();
 }

@@ -2,6 +2,7 @@ import 'package:ecommerce_app/feature/app/domain/entities/cart_entity.dart';
 
 class CartModel extends CartEntity {
   CartModel({
+    required super.id,
     required super.userId,
     required super.productId,
     required super.productName,
@@ -12,7 +13,7 @@ class CartModel extends CartEntity {
     required super.quantity,
     required super.size,
     required super.color,
-    required String id,
+    DateTime? createdAt,
   });
 
   factory CartModel.fromMap(Map<String, dynamic> map) {
@@ -44,6 +45,7 @@ class CartModel extends CartEntity {
       'quantity': quantity,
       'size': size,
       'color': color,
+      'createdAt': createdAt,
     };
   }
 }

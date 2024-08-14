@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:ecommerce_app/core/error/failure.dart';
 import 'package:ecommerce_app/feature/app/data/datasource/local/dao/cart_dao.dart';
 import 'package:ecommerce_app/feature/app/data/datasource/local/database.dart';
@@ -32,6 +34,7 @@ class CartRepositoryImpl implements CartRepository {
         productPrice: cart.productPrice,
         categoryId: cart.categoryId,
         categoryName: cart.categoryName,
+        createdAt: cart.createdAt,
       );
       await cartDao.insertCart(cartModel);
       return Right(cart);
@@ -41,24 +44,24 @@ class CartRepositoryImpl implements CartRepository {
   }
 
   @override
-  Future<Either<Failure, CartEntity>> deleteCart(CartEntity cart) async {
+  Future<Either<Failure, bool>> deleteCart(String id) async {
     try {
       final db = await _appDatabase.database;
       final cartDao = CartDao(db);
-      await cartDao.deleteCart(cart.id);
-      return Right(cart);
+      await cartDao.deleteCart(id);
+      return const Right(true);
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, CartEntity>> updateCart(CartEntity cart) async {
+  Future<Either<Failure, bool>> updateCart(String id, int quantity) async {
     try {
       final db = await _appDatabase.database;
       final cartDao = CartDao(db);
-      await cartDao.updateCart(cart.id, cart.quantity);
-      return Right(cart);
+      await cartDao.updateCart(id, quantity);
+      return const Right(true);
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }

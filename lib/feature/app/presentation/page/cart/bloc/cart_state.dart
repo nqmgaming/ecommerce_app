@@ -19,6 +19,18 @@ final class CartAdded extends CartState {
   CartAdded(this.cart);
 }
 
+final class CartRemoved extends CartState {
+  final bool isRemoved;
+
+  CartRemoved(this.isRemoved);
+}
+
+final class CartUpdated extends CartState {
+  final bool isUpdated;
+
+  CartUpdated(this.isUpdated);
+}
+
 final class CartError extends CartState {
   final String message;
 

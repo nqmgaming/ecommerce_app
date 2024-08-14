@@ -19,10 +19,12 @@ class CartDao {
       'productPrice': cartModel.productPrice,
       'categoryId': cartModel.categoryId,
       'categoryName': cartModel.categoryName,
+      'createdAt': cartModel.createdAt.millisecondsSinceEpoch,
     });
   }
 
   Future<void> updateCart(String id, int quantity) async {
+    print('id: $id, quantity: $quantity');
     await _database.update(
       'Cart',
       {

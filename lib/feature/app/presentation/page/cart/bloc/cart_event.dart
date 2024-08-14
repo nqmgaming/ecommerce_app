@@ -22,9 +22,10 @@ final class RemoveCart extends CartEvent {
 }
 
 final class UpdateCart extends CartEvent {
-  final CartEntity cart;
+  final String id;
+  final int quantity;
 
-  UpdateCart(this.cart);
+  UpdateCart({required this.id, required this.quantity});
 }
 
 final class ClearCart extends CartEvent {}

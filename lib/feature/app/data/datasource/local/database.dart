@@ -37,7 +37,8 @@ class AppDatabase {
         categoryName TEXT,
         quantity INTEGER,
         size TEXT,
-        color TEXT
+        color TEXT,
+        createdAt INTEGER
       )
     ''');
   }
