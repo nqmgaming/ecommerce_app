@@ -14,6 +14,11 @@ class CartDao {
       'quantity': cartModel.quantity,
       'size': cartModel.size,
       'color': cartModel.color,
+      'productName': cartModel.productName,
+      'productImage': cartModel.productImage,
+      'productPrice': cartModel.productPrice,
+      'categoryId': cartModel.categoryId,
+      'categoryName': cartModel.categoryName,
     });
   }
 
@@ -37,10 +42,11 @@ class CartDao {
   }
 
   Future<List<Map<String, dynamic>>> getAllCartByUser(String userId) async {
-    return await _database.query(
+    final response = await _database.query(
       'Cart',
       where: 'userId = ?',
       whereArgs: [userId],
     );
+    return response;
   }
 }

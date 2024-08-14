@@ -556,6 +556,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               final cart = CartEntity(
                                 userId: _userId.toString(),
                                 productId: widget.product.id.toString(),
+                                productName: widget.product.title,
+                                productImage: widget.product.images[0],
+                                productPrice: widget.product.price,
+                                categoryId: widget.product.category.id,
+                                categoryName: widget.product.category.name,
                                 quantity: _cartCount,
                                 size: _sizeSelected!,
                                 color: _colorSelected.toString(),

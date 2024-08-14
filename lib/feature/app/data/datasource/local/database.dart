@@ -30,6 +30,11 @@ class AppDatabase {
         id TEXT PRIMARY KEY,
         userId TEXT,
         productId TEXT,
+        productName TEXT,
+        productImage TEXT,
+        productPrice INTEGER,
+        categoryId INTEGER,
+        categoryName TEXT,
         quantity INTEGER,
         size TEXT,
         color TEXT

@@ -27,6 +27,11 @@ class CartRepositoryImpl implements CartRepository {
         quantity: cart.quantity,
         size: cart.size,
         color: cart.color,
+        productName: cart.productName,
+        productImage: cart.productImage,
+        productPrice: cart.productPrice,
+        categoryId: cart.categoryId,
+        categoryName: cart.categoryName,
       );
       await cartDao.insertCart(cartModel);
       return Right(cart);
@@ -65,16 +70,8 @@ class CartRepositoryImpl implements CartRepository {
       final db = await _appDatabase.database;
       final cartDao = CartDao(db);
       final carts = await cartDao.getAllCartByUser(userId);
-      final cartEntities = carts
-          .map((cart) => CartEntity(
-                id: cart['id'],
-                userId: cart['userId'],
-                productId: cart['productId'],
-                quantity: cart['quantity'],
-                size: cart['size'],
-                color: cart['color'],
-              ))
-          .toList();
+      final cartEntities =
+          carts.map((cart) => CartModel.fromMap(cart)).toList();
       return Right(cartEntities);
     } catch (e) {
       return Left(Failure(message: e.toString()));
