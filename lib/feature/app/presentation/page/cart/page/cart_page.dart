@@ -116,16 +116,16 @@ class _CartPageState extends State<CartPage> {
                             horizontal: 20, vertical: 10),
                         child: ElevatedButton(
                           onPressed: () {
-                            // ignore: avoid_print
-                            print('Checkout');
+                            BlocProvider.of<CartBloc>(context)
+                                .add(ClearCart(_userId.toString()));
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            padding: const EdgeInsets.symmetric(horizontal: 10)
-                          ),
+                              backgroundColor: Colors.black,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10)),
                           child: const SizedBox(
                             height: 50,
                             child: Row(
@@ -332,7 +332,6 @@ class _CartPageState extends State<CartPage> {
           ),
         );
       },
-
     );
   }
 
@@ -350,7 +349,7 @@ class _CartPageState extends State<CartPage> {
             'No items in cart',
             style: TextStyle(
               fontSize: 20,
-              fontWeight: FontWeight.bold,
+              color: Colors.grey
             ),
           ),
         ],

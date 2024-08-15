@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       appBar: AppBar(
         surfaceTintColor: Colors.white,
         title: Container(
@@ -116,96 +117,96 @@ class _HomePageState extends State<HomePage> {
               );
             }
           },
-          builder: (context, state) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Column(
-                children: [
-                  if (state is HomeLoading) ...[
-                    const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ] else if (state is HomeLoaded) ...[
-                    GridView.builder(
-                      padding: const EdgeInsets.all(0),
-                      shrinkWrap: true,
-                      itemCount: state.categories.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 3.5 / 4,
-                      ),
-                      itemBuilder: (context, index) {
-                        final category = state.categories[index];
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              ProductsPage.route(categoryEntity: category),
-                            );
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image:
-                                    CachedNetworkImageProvider(category.image),
-                                fit: BoxFit.cover,
-                              ),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.black.withOpacity(0.5),
-                              ),
-                              child: Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        category.icon,
-                                        color: Colors.white,
-                                        size: 40,
+            builder: (context, state) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      if (state is HomeLoading) ...[
+                        const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ] else if (state is HomeLoaded) ...[
+                        GridView.builder(
+                          padding: const EdgeInsets.all(0),
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: state.categories.length,
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 3.5 / 4,
+                          ),
+                          itemBuilder: (context, index) {
+                            final category = state.categories[index];
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  ProductsPage.route(categoryEntity: category),
+                                );
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: CachedNetworkImageProvider(category.image),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Colors.black.withOpacity(0.5),
+                                  ),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            category.icon,
+                                            color: Colors.white,
+                                            size: 40,
+                                          ),
+                                          Text(
+                                            category.name,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        category.name,
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
+                            );
+                          },
+                        ),
+                      ] else if (state is HomeNoResults) ...[
+                        const Center(
+                          child: Text(
+                            'No categories found',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        );
-                      },
-                    ),
-                  ] else if (state is HomeNoResults) ...[
-                    const Center(
-                      child: Text(
-                        'No categories found',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
                         ),
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-            );
-          },
+                      ],
+                    ],
+                  ),
+                ),
+              );
+            },
         ),
       ),
     );

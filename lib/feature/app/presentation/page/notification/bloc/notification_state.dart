@@ -24,3 +24,15 @@ final class NotificationAdded extends NotificationState {
 
   NotificationAdded(this.isAdded);
 }
+
+final class NotificationRead extends NotificationState {
+  final bool isUpdated;
+
+  NotificationRead(this.isUpdated);
+}
+
+final class NotificationDeleted extends NotificationState {
+  final bool isDeleted;
+
+  NotificationDeleted(this.isDeleted);
+}

@@ -42,6 +42,14 @@ class CartDao {
     );
   }
 
+  Future<void> deleteAllCart(String userId) async {
+    await _database.delete(
+      'Cart',
+      where: 'userId = ?',
+      whereArgs: [userId],
+    );
+  }
+
   Future<List<Map<String, dynamic>>> getAllCartByUser(String userId) async {
     final response = await _database.query(
       'Cart',

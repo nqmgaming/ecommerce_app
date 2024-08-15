@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:ecommerce_app/feature/app/domain/entities/cart_entity.dart';
 import 'package:ecommerce_app/feature/app/domain/usecase/cart/add_to_cart.dart';
+import 'package:ecommerce_app/feature/app/domain/usecase/cart/delete_all_cart.dart';
 import 'package:ecommerce_app/feature/app/domain/usecase/cart/delete_cart_by_id.dart';
 import 'package:ecommerce_app/feature/app/domain/usecase/cart/get_all_cart.dart';
 import 'package:ecommerce_app/feature/app/domain/usecase/cart/update_cart_quantity.dart';
@@ -19,12 +20,14 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   final GetAllCartByUserId _getAllCartByUserId;
   final UpdateCartQuantity _updateCartQuantity;
   final DeleteCartById _deleteCartById;
+  final DeleteAllCart _deleteAllCart;
 
   CartBloc(
     this._addToCart,
     this._getAllCartByUserId,
     this._updateCartQuantity,
     this._deleteCartById,
+    this._deleteAllCart,
   ) : super(CartInitial()) {
     on<CartEvent>((event, emit) {
       emit(CartLoading());
@@ -33,6 +36,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<GetCart>(_onGetAllCart);
     on<UpdateCart>(_onUpdateCart);
     on<RemoveCart>(_onDeleteCart);
+    on<ClearCart>(_onClearCart);
   }
 
   FutureOr<void> _onAddCart(AddCart event, Emitter<CartState> emit) async {
@@ -71,6 +75,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   FutureOr<void> _onDeleteCart(
       RemoveCart event, Emitter<CartState> emit) async {
     final result = await _deleteCartById(DeleteCartByIdParams(event.cart.id));
+    result.fold(
+      (failure) => emit(CartError(failure.message)),
+      (isDeleted) {
+        emit(CartRemoved(isDeleted));
+      },
+    );
+  }
+
+  FutureOr<void> _onClearCart(ClearCart event, Emitter<CartState> emit) async {
+    final result = await _deleteAllCart(DeleteAllCartParams(event.userId));
     result.fold(
       (failure) => emit(CartError(failure.message)),
       (isDeleted) {

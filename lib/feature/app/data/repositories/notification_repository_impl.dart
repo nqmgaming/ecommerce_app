@@ -7,11 +7,19 @@ import 'package:ecommerce_app/feature/app/domain/repositories/notification_repos
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 
+import 'dart:async';
+
 @LazySingleton(as: NotificationRepository)
 class NotificationRepositoryImpl implements NotificationRepository {
   final AppDatabase _appDatabase;
+  final _notificationStreamController =
+      StreamController<List<NotificationEntity>>.broadcast();
 
-  const NotificationRepositoryImpl(this._appDatabase);
+  NotificationRepositoryImpl(this._appDatabase);
+
+  @override
+  Stream<List<NotificationEntity>> get notificationStream =>
+      _notificationStreamController.stream;
 
   @override
   Future<Either<Failure, List<NotificationEntity>>> getNotifications(
@@ -41,9 +49,47 @@ class NotificationRepositoryImpl implements NotificationRepository {
         fullName: notification.fullName,
         profileImage: notification.profileImage,
         createdAt: notification.createdAt,
+        isRead: notification.isRead,
       );
 
       await notificationDao.insertNotification(notificationModel);
+      final updatedNotifications =
+          await notificationDao.getAllNotifications(notification.userId);
+      _notificationStreamController.add(updatedNotifications
+          .map((cart) => NotificationModel.fromMap(cart))
+          .toList());
+      return const Right(true);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> deleteNotification(String id) async {
+    try {
+      final db = await _appDatabase.database;
+      final notificationDao = NotificationDao(db);
+      await notificationDao.deleteNotification(id);
+      final updatedNotifications = await notificationDao.getAllNotifications(id);
+      _notificationStreamController.add(updatedNotifications
+          .map((cart) => NotificationModel.fromMap(cart))
+          .toList());
+      return const Right(true);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> readNotification(String id) async {
+    try {
+      final db = await _appDatabase.database;
+      final notificationDao = NotificationDao(db);
+      await notificationDao.readNotification(id);
+      final updatedNotifications = await notificationDao.getAllNotifications(id);
+      _notificationStreamController.add(updatedNotifications
+          .map((cart) => NotificationModel.fromMap(cart))
+          .toList());
       return const Right(true);
     } catch (e) {
       return Left(Failure(message: e.toString()));

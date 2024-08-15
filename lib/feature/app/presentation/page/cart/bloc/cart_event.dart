@@ -28,7 +28,11 @@ final class UpdateCart extends CartEvent {
   UpdateCart({required this.id, required this.quantity});
 }
 
-final class ClearCart extends CartEvent {}
+final class ClearCart extends CartEvent {
+  final String userId;
+
+  ClearCart(this.userId);
+}
 
 final class CheckoutCart extends CartEvent {}
 

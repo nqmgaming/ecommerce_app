@@ -12,9 +12,11 @@ class NotificationDao {
       'Notification',
       {
         'id': notification.id,
+        'userId': notification.userId,
         'content': notification.content,
         'fullName': notification.fullName,
         'profileImage': notification.profileImage,
+        'isRead': 0,
         'createdAt': notification.createdAt.toString(),
       },
     );
@@ -26,7 +28,29 @@ class NotificationDao {
       'Notification',
       where: 'userId = ?',
       whereArgs: [userId],
+      orderBy: 'createdAt DESC',
     );
     return response;
+  }
+
+  Future<bool> deleteNotification(String id) async {
+    final db = _database;
+    final result = await db.delete(
+      'Notification',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    return result > 0;
+  }
+
+  Future<bool> readNotification(String id) async {
+    final db = _database;
+    final result = await db.update(
+      'Notification',
+      {'isRead': 1},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    return result > 0;
   }
 }

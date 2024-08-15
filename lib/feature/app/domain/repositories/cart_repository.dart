@@ -10,4 +10,6 @@ abstract interface class CartRepository {
   Future<Either<Failure, bool>> updateCart(String id, int quantity);
 
   Future<Either<Failure, bool>> deleteCart(String id);
+
+  Future<Either<Failure, bool>> deleteAllCart(String userId);
 }

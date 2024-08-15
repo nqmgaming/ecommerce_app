@@ -78,4 +78,16 @@ class CartRepositoryImpl implements CartRepository {
       return Left(Failure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> deleteAllCart(String userId) async {
+    try {
+      final db = await _appDatabase.database;
+      final cartDao = CartDao(db);
+      await cartDao.deleteAllCart(userId);
+      return const Right(true);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
 }

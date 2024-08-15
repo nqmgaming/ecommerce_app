@@ -14,3 +14,15 @@ class AddNotificationEvent extends NotificationEvent {
 
   AddNotificationEvent(this.notificationEntity);
 }
+
+class ReadNotificationEvent extends NotificationEvent {
+  final String notificationId;
+
+  ReadNotificationEvent(this.notificationId);
+}
+
+class DeleteNotificationEvent extends NotificationEvent {
+  final String notificationId;
+
+  DeleteNotificationEvent(this.notificationId);
+}

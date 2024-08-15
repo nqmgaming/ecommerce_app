@@ -5,6 +5,7 @@ class NotificationEntity {
   final String fullName;
   final String profileImage;
   final String createdAt;
+  final bool isRead;
 
   NotificationEntity({
     required this.id,
@@ -13,5 +14,6 @@ class NotificationEntity {
     required this.fullName,
     required this.profileImage,
     required this.createdAt,
+    this.isRead = false,
   });
 }

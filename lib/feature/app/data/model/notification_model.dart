@@ -8,6 +8,7 @@ class NotificationModel extends NotificationEntity {
     required super.fullName,
     required super.profileImage,
     required super.createdAt,
+    required super.isRead,
   });
 
   factory NotificationModel.fromMap(Map<String, dynamic> json) {
@@ -18,6 +19,7 @@ class NotificationModel extends NotificationEntity {
       fullName: json['fullName'],
       profileImage: json['profileImage'],
       createdAt: json['createdAt'],
+      isRead: json['isRead'] == 1,
     );
   }
 
@@ -29,6 +31,7 @@ class NotificationModel extends NotificationEntity {
       'fullName': fullName,
       'profileImage': profileImage,
       'createdAt': createdAt,
+      'isRead': isRead ? 1 : 0,
     };
   }
 }

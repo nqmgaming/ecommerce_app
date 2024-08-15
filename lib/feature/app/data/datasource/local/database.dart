@@ -48,7 +48,9 @@ class AppDatabase {
         content TEXT,
         fullName TEXT,
         profileImage TEXT,
-        createdAt TEXT
+        createdAt TEXT,
+        userId TEXT,
+        isRead INTEGER
       )
     ''');
   }
