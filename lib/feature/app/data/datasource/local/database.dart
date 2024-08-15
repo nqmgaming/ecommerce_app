@@ -41,5 +41,15 @@ class AppDatabase {
         createdAt INTEGER
       )
     ''');
+
+    await db.execute('''
+      CREATE TABLE Notification (
+        id TEXT PRIMARY KEY,
+        content TEXT,
+        fullName TEXT,
+        profileImage TEXT,
+        createdAt TEXT
+      )
+    ''');
   }
 }

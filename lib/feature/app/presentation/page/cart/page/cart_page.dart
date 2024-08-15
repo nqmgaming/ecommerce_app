@@ -126,9 +126,9 @@ class _CartPageState extends State<CartPage> {
                             ),
                             padding: const EdgeInsets.symmetric(horizontal: 10)
                           ),
-                          child: Container(
+                          child: const SizedBox(
                             height: 50,
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
