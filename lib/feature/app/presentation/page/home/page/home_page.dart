@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/home/bloc/home_bloc.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/home/page/products_page.dart';
 import 'package:flutter/material.dart';
@@ -148,7 +149,8 @@ class _HomePageState extends State<HomePage> {
                             margin: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: NetworkImage(category.image),
+                                image:
+                                    CachedNetworkImageProvider(category.image),
                                 fit: BoxFit.cover,
                               ),
                               borderRadius: BorderRadius.circular(15),
@@ -162,26 +164,26 @@ class _HomePageState extends State<HomePage> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          category.icon,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        category.icon,
+                                        color: Colors.white,
+                                        size: 40,
+                                      ),
+                                      Text(
+                                        category.name,
+                                        style: const TextStyle(
                                           color: Colors.white,
-                                          size: 40,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                        Text(
-                                          category.name,
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ]),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

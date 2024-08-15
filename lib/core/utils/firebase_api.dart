@@ -10,7 +10,6 @@ class FirebaseApi {
     await _firebaseMessaging.requestPermission();
 
     final fcmToken = await _firebaseMessaging.getToken();
-    print("FCM Token: $fcmToken");
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       _handleMessage(message);
@@ -20,7 +19,8 @@ class FirebaseApi {
       _handleMessage(message);
     });
 
-    RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage != null) {
       _handleMessage(initialMessage);
     }

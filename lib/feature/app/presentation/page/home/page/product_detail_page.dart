@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:ecommerce_app/feature/app/domain/entities/cart_entity.dart';
 import 'package:ecommerce_app/feature/app/domain/entities/product_entity.dart';
@@ -148,8 +149,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     Swiper(
                       itemCount: widget.product.images.length,
                       itemBuilder: (context, index) {
-                        return Image.network(
-                          widget.product.images[index],
+                        return CachedNetworkImage(
+                          imageUrl: widget.product.images[index],
                           fit: BoxFit.cover,
                           scale: 1.0,
                         );

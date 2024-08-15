@@ -28,4 +28,5 @@ class CategoryModel extends CategoryEntity {
       'updatedAt': super.updatedAt,
     };
   }
+
 }
