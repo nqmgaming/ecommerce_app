@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/constants/colors_constant.dart';
 import 'package:ecommerce_app/core/constants/fonts_constant.dart';
 import 'package:ecommerce_app/core/constants/images_constant.dart';
 import 'package:ecommerce_app/feature/auth/presentation/page/login_page.dart';
@@ -96,7 +97,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   ),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                    color: Colors.grey.withOpacity(0.3),
+                    color: ColorsConstant.greyColor.withOpacity(0.3),
                     width: 1,
                   ),
                 ),
@@ -117,7 +118,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               style: const TextStyle(
                 fontSize: 17,
                 fontFamily: FontConstants.productSansRegular,
-                color: Colors.grey,
+                color: ColorsConstant.greyColor,
               ),
             )
           ],
@@ -129,7 +130,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorsConstant.whiteColor,
       appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -166,8 +167,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       height: 8,
                       width: _currentPage == index ? 25 : 10,
                       decoration: BoxDecoration(
-                        color:
-                            _currentPage == index ? Colors.black : Colors.grey,
+                        color: _currentPage == index
+                            ? ColorsConstant.blackColor
+                            : ColorsConstant.greyColor,
                         borderRadius: BorderRadius.circular(5),
                       ),
                     ),
@@ -182,12 +184,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   icon: Container(
                     padding: const EdgeInsets.all(10),
                     decoration: const BoxDecoration(
-                      color: Colors.black,
+                      color: ColorsConstant.blackColor,
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
                       Icons.arrow_forward_ios,
-                      color: Colors.white,
+                      color: ColorsConstant.whiteColor,
                     ),
                   ),
                 )

@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/constants/colors_constant.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/cart/bloc/cart_bloc.dart';
 import 'package:ecommerce_app/feature/app/presentation/widget/increase_decrease_button.dart';
 import 'package:ecommerce_app/generated/l10n.dart';
@@ -72,7 +73,7 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     final delegate = S.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorsConstant.whiteColor,
       appBar: _buildAppBar(),
       body: BlocConsumer<CartBloc, CartState>(
         listener: (context, state) {
@@ -112,7 +113,7 @@ class _CartPageState extends State<CartPage> {
                 child: Container(
                   height: 120,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: ColorsConstant.whiteColor,
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: [
                       BoxShadow(
@@ -135,7 +136,7 @@ class _CartPageState extends State<CartPage> {
                               style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.grey),
+                                  color: ColorsConstant.greyColor),
                             ),
                             const Spacer(),
                             Text(
@@ -171,14 +172,14 @@ class _CartPageState extends State<CartPage> {
                                 Text(
                                   delegate.checkout,
                                   style: const TextStyle(
-                                    color: Colors.white,
+                                    color: ColorsConstant.whiteColor,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 const Icon(
                                   Icons.arrow_circle_right_sharp,
-                                  color: Colors.white,
+                                  color: ColorsConstant.whiteColor,
                                 ),
                               ],
                             ),
@@ -199,13 +200,13 @@ class _CartPageState extends State<CartPage> {
   AppBar _buildAppBar() {
     final delegate = S.of(context);
     return AppBar(
-      surfaceTintColor: Colors.white,
+      surfaceTintColor: ColorsConstant.whiteColor,
       centerTitle: true,
       leading: widget.isMain
           ? IconButton(
               icon: const Icon(
                 Icons.arrow_back_ios,
-                color: Colors.black,
+                color: ColorsConstant.blackColor,
               ),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -215,7 +216,7 @@ class _CartPageState extends State<CartPage> {
       title: Text(
         delegate.cartLabel,
         style: const TextStyle(
-          color: Colors.black,
+          color: ColorsConstant.blackColor,
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
@@ -226,11 +227,11 @@ class _CartPageState extends State<CartPage> {
           margin: const EdgeInsets.only(right: 10),
           height: 50,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: ColorsConstant.whiteColor,
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: ColorsConstant.greyColor.withOpacity(0.5),
                 spreadRadius: 0.1,
                 blurRadius: 5,
                 offset: const Offset(0, 1),
@@ -239,8 +240,8 @@ class _CartPageState extends State<CartPage> {
           ),
           child: Center(
             child: Badge(
-              textStyle: const TextStyle(color: Colors.red),
-              backgroundColor: Colors.black,
+              textStyle: const TextStyle(color: ColorsConstant.redColor),
+              backgroundColor: ColorsConstant.blackColor,
               label: Text(
                 _cartLength.toString(),
                 style: const TextStyle(fontSize: 10),
@@ -261,7 +262,7 @@ class _CartPageState extends State<CartPage> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: Colors.red,
+        backgroundColor: ColorsConstant.redColor,
       ),
     );
   }
@@ -280,10 +281,10 @@ class _CartPageState extends State<CartPage> {
             borderRadius: BorderRadius.circular(15),
           ),
           elevation: 10,
-          shadowColor: Colors.black.withOpacity(0.7),
+          shadowColor: ColorsConstant.blackColor.withOpacity(0.7),
           margin: const EdgeInsets.all(10),
-          color: Colors.white,
-          surfaceTintColor: Colors.white,
+          color: ColorsConstant.whiteColor,
+          surfaceTintColor: ColorsConstant.whiteColor,
           child: Dismissible(
             key: Key(cart.id.toString()),
             direction: DismissDirection.endToStart,
@@ -292,12 +293,12 @@ class _CartPageState extends State<CartPage> {
               padding: const EdgeInsets.only(right: 20),
               margin: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: ColorsConstant.blackColor,
                 borderRadius: BorderRadius.circular(15),
               ),
               child: const Icon(
                 Icons.delete,
-                color: Colors.white,
+                color: ColorsConstant.whiteColor,
                 size: 30,
               ),
             ),
@@ -344,14 +345,14 @@ class _CartPageState extends State<CartPage> {
                         Text(
                           cart.categoryName,
                           style: const TextStyle(
-                            color: Colors.grey,
+                            color: ColorsConstant.greyColor,
                             fontSize: 14,
                           ),
                         ),
                         Text(
                           "Size: ${cart.size}",
                           style: const TextStyle(
-                            color: Colors.grey,
+                            color: ColorsConstant.greyColor,
                             fontSize: 14,
                           ),
                         ),
@@ -403,11 +404,12 @@ class _CartPageState extends State<CartPage> {
           const Icon(
             Icons.shopping_bag_outlined,
             size: 100,
-            color: Colors.grey,
+            color: ColorsConstant.greyColor,
           ),
           Text(
             delegate.noItemsInCart,
-            style: const TextStyle(fontSize: 20, color: Colors.grey),
+            style:
+                const TextStyle(fontSize: 20, color: ColorsConstant.greyColor),
           ),
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/constants/colors_constant.dart';
 import 'package:flutter/material.dart';
 
 class AuthTextField extends StatefulWidget {
@@ -36,30 +37,30 @@ class _AuthTextFieldState extends State<AuthTextField> {
       onTapOutside: (_) {
         FocusScope.of(context).unfocus();
       },
-      cursorColor: Colors.black,
+      cursorColor: ColorsConstant.blackColor,
       decoration: InputDecoration(
         label: Text(widget.hintText),
-        labelStyle: const TextStyle(
-          color: Colors.black,
+        labelStyle: TextStyle(
+          color: ColorsConstant.blackColor.withOpacity(0.5),
           fontWeight: FontWeight.w500,
         ),
         enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
+          borderSide: BorderSide(color: ColorsConstant.greyColor),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.black),
+          borderSide: BorderSide(color: ColorsConstant.blackColor),
         ),
         errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.red),
+          borderSide: BorderSide(color: ColorsConstant.redColor),
         ),
         focusedErrorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.red),
+          borderSide: BorderSide(color: ColorsConstant.redColor),
         ),
         suffixIcon: widget.obscureText
             ? IconButton(
                 icon: Icon(
                   _passwordVisible ? Icons.visibility : Icons.visibility_off,
-                  color: Colors.black,
+                  color: ColorsConstant.blackColor,
                 ),
                 onPressed: () {
                   setState(() {

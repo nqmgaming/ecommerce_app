@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/constants/colors_constant.dart';
 import 'package:ecommerce_app/core/constants/images_constant.dart';
 import 'package:ecommerce_app/core/utils/user_session.dart';
 import 'package:ecommerce_app/feature/auth/presentation/page/login_page.dart';
@@ -30,7 +31,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final delegate = S.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorsConstant.whiteColor,
       appBar: AppBar(
         title: Text(delegate.profilePageTitle),
       ),
@@ -96,7 +97,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       delegate.errorLoadingEmail,
                       style: const TextStyle(
                         fontSize: 16,
-                        color: Colors.grey,
+                        color: ColorsConstant.greyColor,
                       ),
                     );
                   } else {
@@ -104,7 +105,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       snapshot.data ?? '',
                       style: const TextStyle(
                         fontSize: 16,
-                        color: Colors.grey,
+                        color: ColorsConstant.greyColor,
                       ),
                     );
                   }

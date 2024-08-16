@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/constants/colors_constant.dart';
 import 'package:flutter/material.dart';
 
 class IncreaseDecreaseButton extends StatefulWidget {
@@ -45,7 +46,7 @@ class _IncreaseDecreaseButtonState extends State<IncreaseDecreaseButton> {
       height: 40,
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: ColorsConstant.greyColor,
         borderRadius: BorderRadius.circular(40),
       ),
       child: Row(

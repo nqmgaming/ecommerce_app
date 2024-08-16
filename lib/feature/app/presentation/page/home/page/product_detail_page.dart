@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:ecommerce_app/core/constants/colors_constant.dart';
 import 'package:ecommerce_app/feature/app/domain/entities/cart_entity.dart';
 import 'package:ecommerce_app/feature/app/domain/entities/product_entity.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/cart/bloc/cart_bloc.dart';
@@ -92,12 +93,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           icon: Container(
             padding: const EdgeInsets.all(8),
             decoration: const BoxDecoration(
-              color: Colors.white,
+              color: ColorsConstant.whiteColor,
               shape: BoxShape.circle,
             ),
             child: const Icon(
               Icons.arrow_back,
-              color: Colors.black,
+              color: ColorsConstant.blackColor,
             ),
           ),
           onPressed: () {
@@ -109,11 +110,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             icon: Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: ColorsConstant.whiteColor,
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey,
+                    color: ColorsConstant.greyColor,
                     blurRadius: 10,
                     spreadRadius: 1,
                   ),
@@ -121,7 +122,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               ),
               child: const Icon(
                 Icons.shopping_cart,
-                color: Colors.black,
+                color: ColorsConstant.blackColor,
                 size: 18,
               ),
             ),
@@ -155,10 +156,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           return Stack(
             children: [
               Container(
-                color: Colors.white,
+                color: ColorsConstant.whiteColor,
               ),
               Container(
-                color: Colors.white,
+                color: ColorsConstant.whiteColor,
                 width: double.infinity,
                 height: 450,
                 child: Stack(
@@ -208,7 +209,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   decoration: BoxDecoration(
                                     border: _currentPage == index
                                         ? Border.all(
-                                            color: Colors.white,
+                                            color: ColorsConstant.whiteColor,
                                             width: 1,
                                           )
                                         : null,
@@ -218,7 +219,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     padding: const EdgeInsets.all(4),
                                     child: Container(
                                       decoration: const BoxDecoration(
-                                        color: Colors.white,
+                                        color: ColorsConstant.whiteColor,
                                         shape: BoxShape.circle,
                                       ),
                                     ),
@@ -233,13 +234,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
                                 color:
-                                    _isFavorite ? Colors.black : Colors.white,
+                                    _isFavorite ? ColorsConstant.blackColor : ColorsConstant.whiteColor,
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(
                                 Icons.favorite_border,
                                 color:
-                                    _isFavorite ? Colors.white : Colors.black,
+                                    _isFavorite ? ColorsConstant.whiteColor : ColorsConstant.blackColor,
                               ),
                             ),
                             onPressed: () {
@@ -262,7 +263,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   height: MediaQuery.of(context).size.height - 400,
                   padding: const EdgeInsets.all(20),
                   decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: ColorsConstant.whiteColor,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
@@ -300,7 +301,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                       style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.normal,
-                                        color: Colors.grey,
+                                        color: ColorsConstant.greyColor,
                                       ),
                                     ),
                                     Row(
@@ -321,7 +322,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                           itemBuilder: (context, _) =>
                                               const Icon(
                                             Icons.star,
-                                            color: Colors.amber,
+                                            color: ColorsConstant.amberColor,
                                           ),
                                           onRatingUpdate: (rating) {},
                                         ),
@@ -330,7 +331,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                           style: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.black,
+                                            color: ColorsConstant.blackColor,
                                           ),
                                         ),
                                       ],
@@ -356,7 +357,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.black,
+                                      color: ColorsConstant.blackColor,
                                     ),
                                   ),
                                 ],
@@ -375,7 +376,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: ColorsConstant.blackColor,
                             ),
                           ),
                           const SizedBox(
@@ -399,8 +400,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     shape: BoxShape.circle,
                                     border: Border.all(
                                       color: _colorSelected == _colors[index]
-                                          ? Colors.black
-                                          : Colors.grey.shade200,
+                                          ? ColorsConstant.blackColor
+                                          : ColorsConstant.greyColor,
                                       width: 2,
                                     ),
                                   ),
@@ -416,7 +417,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: ColorsConstant.blackColor,
                             ),
                           ),
                           const SizedBox(
@@ -438,13 +439,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   padding: const EdgeInsets.all(10),
                                   decoration: BoxDecoration(
                                     color: _sizeSelected == _sizes[index]
-                                        ? Colors.black
-                                        : Colors.white,
+                                        ? ColorsConstant.blackColor
+                                        : ColorsConstant.whiteColor,
                                     shape: BoxShape.circle,
                                     border: Border.all(
                                       color: _sizeSelected == _sizes[index]
-                                          ? Colors.black
-                                          : Colors.grey.shade200,
+                                          ? ColorsConstant.blackColor
+                                          : ColorsConstant.greyColor,
                                       width: 2,
                                     ),
                                   ),
@@ -453,8 +454,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                       _sizes[index],
                                       style: TextStyle(
                                           color: _sizeSelected == _sizes[index]
-                                              ? Colors.white
-                                              : Colors.grey,
+                                              ? ColorsConstant.whiteColor
+                                              : ColorsConstant.greyColor,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 12),
                                       textAlign: TextAlign.center,
@@ -472,7 +473,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: ColorsConstant.blackColor,
                             ),
                           ),
                           const SizedBox(
@@ -483,7 +484,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
-                              color: Colors.grey,
+                              color: ColorsConstant.greyColor,
                             ),
                           ),
                           const SizedBox(
@@ -503,10 +504,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   height: 120,
                   padding: const EdgeInsets.all(20),
                   decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: ColorsConstant.whiteColor,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey,
+                        color: ColorsConstant.greyColor,
                         blurRadius: 10,
                         spreadRadius: 1,
                       ),
@@ -525,7 +526,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,
-                                color: Colors.grey,
+                                color: ColorsConstant.greyColor,
                               ),
                             ),
                             Text(
@@ -533,7 +534,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                                color: ColorsConstant.blackColor,
                               ),
                             ),
                           ],
@@ -545,7 +546,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         child: Container(
                           height: 50,
                           decoration: BoxDecoration(
-                            color: Colors.black,
+                            color: ColorsConstant.blackColor,
                             borderRadius: BorderRadius.circular(40),
                           ),
                           child: ElevatedButton(
@@ -578,11 +579,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               }
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.black,
+                              backgroundColor: ColorsConstant.blackColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(40),
                               ),
-                              foregroundColor: Colors.white,
+                              foregroundColor: ColorsConstant.whiteColor,
                             ),
                             child: Row(children: [
                               const Icon(Icons.shopping_cart),
@@ -592,7 +593,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  color: ColorsConstant.whiteColor,
                                 ),
                               ),
                             ]),

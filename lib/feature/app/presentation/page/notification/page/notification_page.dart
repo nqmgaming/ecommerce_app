@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce_app/core/constants/colors_constant.dart';
 import 'package:ecommerce_app/core/utils/convert_date.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/notification/bloc/notification_bloc.dart';
 import 'package:ecommerce_app/generated/l10n.dart';
@@ -34,13 +35,13 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget build(BuildContext context) {
     final delegate = S.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorsConstant.whiteColor,
       appBar: AppBar(
-        surfaceTintColor: Colors.white,
+        surfaceTintColor: ColorsConstant.whiteColor,
         title: Text(
           delegate.notificationsTitle,
           style: const TextStyle(
-            color: Colors.black,
+            color: ColorsConstant.blackColor,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -50,11 +51,11 @@ class _NotificationPageState extends State<NotificationPage> {
             margin: const EdgeInsets.only(right: 10),
             height: 50,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: ColorsConstant.whiteColor,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
+                  color: ColorsConstant.greyColor.withOpacity(0.5),
                   spreadRadius: 0.1,
                   blurRadius: 5,
                   offset: const Offset(0, 1),
@@ -64,7 +65,7 @@ class _NotificationPageState extends State<NotificationPage> {
             child: const Center(
               child: Icon(
                 Icons.more_vert,
-                color: Colors.black,
+                color: ColorsConstant.blackColor,
                 size: 20,
               ),
             ),
@@ -105,12 +106,12 @@ class _NotificationPageState extends State<NotificationPage> {
                       const Icon(
                         Icons.notifications_off,
                         size: 100,
-                        color: Colors.grey,
+                        color: ColorsConstant.greyColor,
                       ),
                       Text(
                         delegate.noNotifications,
                         style: const TextStyle(
-                          color: Colors.grey,
+                          color: ColorsConstant.greyColor,
                           fontSize: 20,
                         ),
                       ),
@@ -137,12 +138,12 @@ class _NotificationPageState extends State<NotificationPage> {
                       padding: const EdgeInsets.only(right: 20),
                       margin: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: Colors.black,
+                        color: ColorsConstant.blackColor,
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: const Icon(
                         Icons.delete,
-                        color: Colors.white,
+                        color: ColorsConstant.whiteColor,
                         size: 30,
                       ),
                     ),
@@ -213,7 +214,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                       Text(
                                         convertDate(notification.createdAt),
                                         style: const TextStyle(
-                                          color: Colors.grey,
+                                          color: ColorsConstant.greyColor,
                                           fontSize: 12,
                                         ),
                                       ),
@@ -239,12 +240,12 @@ class _NotificationPageState extends State<NotificationPage> {
                   const Icon(
                     Icons.notifications_off,
                     size: 100,
-                    color: Colors.grey,
+                    color: ColorsConstant.greyColor,
                   ),
                   Text(
                     delegate.noNotifications,
                     style: const TextStyle(
-                      color: Colors.grey,
+                      color: ColorsConstant.greyColor,
                       fontSize: 20,
                     ),
                   ),

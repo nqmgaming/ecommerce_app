@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce_app/core/constants/colors_constant.dart';
 import 'package:ecommerce_app/feature/app/domain/entities/category_entity.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/app_page.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/cart/page/cart_page.dart';
@@ -62,13 +63,13 @@ class _ProductsPageState extends State<ProductsPage> {
         );
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorsConstant.whiteColor,
         appBar: AppBar(
           elevation: 10,
-          surfaceTintColor: Colors.white,
+          surfaceTintColor: ColorsConstant.whiteColor,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
-            color: Colors.black,
+            color: ColorsConstant.blackColor,
             onPressed: () {
               Navigator.pushAndRemoveUntil(
                 context,
@@ -99,7 +100,7 @@ class _ProductsPageState extends State<ProductsPage> {
             IconButton(
               icon: const Icon(Icons.search),
               onPressed: () {},
-              color: Colors.black,
+              color: ColorsConstant.blackColor,
             ),
             IconButton(
               icon: const Icon(Icons.shopping_cart),
@@ -122,8 +123,8 @@ class _ProductsPageState extends State<ProductsPage> {
           ),
         ),
         body: RefreshIndicator(
-          color: Colors.black,
-          backgroundColor: Colors.white,
+          color: ColorsConstant.blackColor,
+          backgroundColor: ColorsConstant.whiteColor,
           onRefresh: () async {
             context
                 .read<HomeBloc>()
@@ -155,14 +156,14 @@ class _ProductsPageState extends State<ProductsPage> {
                         const Icon(
                           Icons.info_outline,
                           size: 80,
-                          color: Colors.grey,
+                          color: ColorsConstant.greyColor,
                         ),
                         const SizedBox(height: 16),
                         Text(
                           delegate.noProductsAvailable,
                           style: const TextStyle(
                             fontSize: 18,
-                            color: Colors.grey,
+                            color: ColorsConstant.greyColor,
                           ),
                         ),
                       ],
@@ -186,7 +187,7 @@ class _ProductsPageState extends State<ProductsPage> {
                         );
                       },
                       child: Card(
-                        color: Colors.white,
+                        color: ColorsConstant.whiteColor,
                         elevation: 0,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -210,6 +211,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                         const Icon(
                                       Icons.error,
                                       size: 150,
+                                      color: ColorsConstant.blackColor,
                                     ),
                                   ),
                                   Positioned(
@@ -228,7 +230,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                           },
                                           child: const Icon(
                                             Icons.favorite_border,
-                                            color: Colors.white,
+                                            color: ColorsConstant.whiteColor,
                                             size: 15,
                                           ),
                                         ),
@@ -255,7 +257,7 @@ class _ProductsPageState extends State<ProductsPage> {
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,
-                                color: Colors.grey,
+                                color: ColorsConstant.greyColor,
                               ),
                               textAlign: TextAlign.center,
                             ),

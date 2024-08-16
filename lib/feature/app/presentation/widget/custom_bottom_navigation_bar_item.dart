@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/constants/colors_constant.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigationBarItem extends StatelessWidget {
@@ -26,12 +27,12 @@ class CustomBottomNavigationBarItem extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: isSelected ? Colors.black : Colors.transparent,
+              color: isSelected ? ColorsConstant.blackColor : ColorsConstant.transparentColor,
             ),
             padding: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
             child: Icon(
               icon,
-              color: isSelected ? Colors.white : Colors.black,
+              color: isSelected ? ColorsConstant.whiteColor : ColorsConstant.blackColor,
               size: 24,
             ),
           ),
@@ -41,7 +42,7 @@ class CustomBottomNavigationBarItem extends StatelessWidget {
             child: Text(
               isSelected ? label : '',
               style: const TextStyle(
-                color: Colors.black,
+                color: ColorsConstant.blackColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 9,
                 letterSpacing: 0.1

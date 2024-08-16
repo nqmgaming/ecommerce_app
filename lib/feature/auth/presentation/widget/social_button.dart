@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/constants/colors_constant.dart';
 import 'package:flutter/material.dart';
 
 class SocialButton extends StatelessWidget {
@@ -19,7 +20,7 @@ class SocialButton extends StatelessWidget {
       child: TextButton(
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
-          foregroundColor: Colors.black,
+          foregroundColor: ColorsConstant.blackColor,
         ),
         onPressed: () {
           onPressed();

@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/core/common/widget/app_text_button.dart';
+import 'package:ecommerce_app/core/constants/colors_constant.dart';
 import 'package:ecommerce_app/core/constants/fonts_constant.dart';
 import 'package:ecommerce_app/core/constants/images_constant.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/app_page.dart';
@@ -39,18 +40,18 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.white,
+        backgroundColor: ColorsConstant.whiteColor,
+        foregroundColor: ColorsConstant.whiteColor,
       ),
       body: Container(
-        color: Colors.white,
+        color: ColorsConstant.whiteColor,
         child: BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
             if (state is AuthError) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.message),
-                  backgroundColor: Colors.red,
+                  backgroundColor: ColorsConstant.redColor,
                 ),
               );
             }
@@ -144,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(delegate.pleaseFillRequired),
-                              backgroundColor: Colors.red,
+                              backgroundColor: ColorsConstant.redColor,
                             ),
                           );
                         }
@@ -156,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                     Text(
                       delegate.orLoginWith,
                       style: const TextStyle(
-                        color: Colors.black,
+                        color: ColorsConstant.blackColor,
                         fontSize: 14,
                         fontFamily: FontConstants.productSansRegular,
                       ),
@@ -190,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                           text: TextSpan(
                         text: delegate.dontHaveAccount,
                         style: const TextStyle(
-                          color: Colors.black,
+                          color: ColorsConstant.blackColor,
                           fontSize: 16,
                           fontFamily: FontConstants.productSansRegular,
                         ),
@@ -198,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                           TextSpan(
                             text: delegate.signUp,
                             style: const TextStyle(
-                              color: Colors.black,
+                              color: ColorsConstant.blackColor,
                               fontSize: 16,
                               fontFamily: FontConstants.productSansBold,
                               decoration: TextDecoration.underline,

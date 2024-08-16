@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/constants/colors_constant.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/profile/page/profile_page.dart';
 import 'package:ecommerce_app/feature/app/presentation/widget/custom_bottom_navigation_bar_item.dart';
 import 'package:ecommerce_app/generated/l10n.dart';
@@ -46,7 +47,7 @@ class _AppPageState extends State<AppPage> {
       ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: ColorsConstant.whiteColor,
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(30), topLeft: Radius.circular(30)),
           boxShadow: [
@@ -96,8 +97,8 @@ class _AppPageState extends State<AppPage> {
             currentIndex: _selectedIndex,
             showSelectedLabels: false,
             onTap: _onItemTapped,
-            backgroundColor: Colors.white,
-            selectedItemColor: Colors.black,
+            backgroundColor: ColorsConstant.whiteColor,
+            selectedItemColor: ColorsConstant.blackColor,
           ),
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce_app/core/constants/colors_constant.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/home/bloc/home_bloc.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/home/page/products_page.dart';
 import 'package:ecommerce_app/generated/l10n.dart';
@@ -45,9 +46,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        surfaceTintColor: Colors.white,
+        surfaceTintColor: ColorsConstant.whiteColor,
         title: Container(
-          color: Colors.white,
+          color: ColorsConstant.whiteColor,
           child: Card(
             elevation: 0,
             color: const Color.fromRGBO(243, 244, 246, 1),
@@ -60,13 +61,13 @@ class _HomePageState extends State<HomePage> {
                 controller: _searchController,
                 decoration: InputDecoration(
                   hintStyle: const TextStyle(
-                    color: Colors.grey,
+                    color: ColorsConstant.greyColor,
                   ),
                   hintText: delegate.searchCategories,
                   prefixIcon: const Icon(Icons.search),
                   border: InputBorder.none,
                 ),
-                cursorColor: Colors.black,
+                cursorColor: ColorsConstant.blackColor,
               ),
             ),
           ),
@@ -75,7 +76,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             margin: const EdgeInsets.only(right: 20),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: ColorsConstant.whiteColor,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
@@ -87,7 +88,7 @@ class _HomePageState extends State<HomePage> {
             ),
             child: IconButton(
               icon: const Icon(Icons.filter_list),
-              color: Colors.black,
+              color: ColorsConstant.blackColor,
               onPressed: () {
                 // Navigator.of(context).push(CartPage.route());
               },
@@ -95,10 +96,10 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: ColorsConstant.whiteColor,
       body: RefreshIndicator(
-        color: Colors.black,
-        backgroundColor: Colors.white,
+        color: ColorsConstant.blackColor,
+        backgroundColor: ColorsConstant.whiteColor,
         onRefresh: () async {
           context.read<HomeBloc>().add(HomeLoadCategories());
         },
@@ -114,7 +115,7 @@ class _HomePageState extends State<HomePage> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.message),
-                  backgroundColor: Colors.red,
+                  backgroundColor: ColorsConstant.redColor,
                 ),
               );
             }
@@ -130,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                         child: Padding(
                           padding: EdgeInsets.only(top: 100),
                           child: CircularProgressIndicator(
-                            color: Colors.black,
+                            color: ColorsConstant.blackColor,
                           ),
                         ),
                       ),
@@ -179,13 +180,13 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         Icon(
                                           category.icon,
-                                          color: Colors.white,
+                                          color: ColorsConstant.whiteColor,
                                           size: 40,
                                         ),
                                         Text(
                                           category.name,
                                           style: const TextStyle(
-                                            color: Colors.white,
+                                            color: ColorsConstant.whiteColor,
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
                                           ),

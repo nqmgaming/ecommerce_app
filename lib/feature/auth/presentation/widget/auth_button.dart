@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/constants/colors_constant.dart';
 import 'package:ecommerce_app/core/constants/fonts_constant.dart';
 import 'package:flutter/material.dart';
 
@@ -23,8 +24,8 @@ class AuthButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          backgroundColor: const Color.fromRGBO(45, 32, 28, 1),
-          foregroundColor: Colors.white,
+          backgroundColor: ColorsConstant.buttonColor,
+          foregroundColor: ColorsConstant.whiteColor,
         ),
         onPressed: isLoading ? null : onPressed,
         child: isLoading
@@ -37,7 +38,7 @@ class AuthButton extends StatelessWidget {
             : Text(
                 title.toUpperCase(),
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: ColorsConstant.whiteColor,
                   fontFamily: FontConstants.productSansRegular,
                   fontSize: 16,
                 ),
