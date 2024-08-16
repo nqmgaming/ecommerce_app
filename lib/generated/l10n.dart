@@ -179,6 +179,456 @@ class S {
       args: [],
     );
   }
+
+  /// `Welcome to GemStore!`
+  String get welcomeTitle {
+    return Intl.message(
+      'Welcome to GemStore!',
+      name: 'welcomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `\n\nThe home for a fashionista`
+  String get homeForFashionista {
+    return Intl.message(
+      '\n\nThe home for a fashionista',
+      name: 'homeForFashionista',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get Started`
+  String get getStartedButton {
+    return Intl.message(
+      'Get Started',
+      name: 'getStartedButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `20% Discount New Arrival Product`
+  String get discoverSomethingNew {
+    return Intl.message(
+      '20% Discount New Arrival Product',
+      name: 'discoverSomethingNew',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Publish up your selfies to make yourself more beautiful with this app.`
+  String get specialNewArrivals {
+    return Intl.message(
+      'Publish up your selfies to make yourself more beautiful with this app.',
+      name: 'specialNewArrivals',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take Advantage Of The Offer Shopping`
+  String get updateTrendyOutfit {
+    return Intl.message(
+      'Take Advantage Of The Offer Shopping',
+      name: 'updateTrendyOutfit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorite brands and hottest trends`
+  String get favoriteBrands {
+    return Intl.message(
+      'Favorite brands and hottest trends',
+      name: 'favoriteBrands',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All Types Offers Within Your Reach`
+  String get exploreTrueStyle {
+    return Intl.message(
+      'All Types Offers Within Your Reach',
+      name: 'exploreTrueStyle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Relax and let us bring the style to you`
+  String get relaxBringStyle {
+    return Intl.message(
+      'Relax and let us bring the style to you',
+      name: 'relaxBringStyle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shopping Now`
+  String get shoppingNow {
+    return Intl.message(
+      'Shopping Now',
+      name: 'shoppingNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profilePageTitle {
+    return Intl.message(
+      'Profile',
+      name: 'profilePageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading name`
+  String get errorLoadingName {
+    return Intl.message(
+      'Error loading name',
+      name: 'errorLoadingName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading email`
+  String get errorLoadingEmail {
+    return Intl.message(
+      'Error loading email',
+      name: 'errorLoadingEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logoutButton {
+    return Intl.message(
+      'Logout',
+      name: 'logoutButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get homeLabel {
+    return Intl.message(
+      'Home',
+      name: 'homeLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cart`
+  String get cartLabel {
+    return Intl.message(
+      'Cart',
+      name: 'cartLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alert`
+  String get alertLabel {
+    return Intl.message(
+      'Alert',
+      name: 'alertLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profileLabel {
+    return Intl.message(
+      'Profile',
+      name: 'profileLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notificationsTitle {
+    return Intl.message(
+      'Notifications',
+      name: 'notificationsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No notifications`
+  String get noNotifications {
+    return Intl.message(
+      'No notifications',
+      name: 'noNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get deleteNotification {
+    return Intl.message(
+      'Delete',
+      name: 'deleteNotification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading notifications`
+  String get errorLoadingNotifications {
+    return Intl.message(
+      'Error loading notifications',
+      name: 'errorLoadingNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{date}`
+  String notificationDateFormat(Object date) {
+    return Intl.message(
+      '$date',
+      name: 'notificationDateFormat',
+      desc: '',
+      args: [date],
+    );
+  }
+
+  /// `Order Successful`
+  String get orderSuccessfulTitle {
+    return Intl.message(
+      'Order Successful',
+      name: 'orderSuccessfulTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your order has been placed successfully`
+  String get orderSuccessfulContent {
+    return Intl.message(
+      'Your order has been placed successfully',
+      name: 'orderSuccessfulContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK`
+  String get okCaption {
+    return Intl.message(
+      'OK',
+      name: 'okCaption',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Checkout`
+  String get checkout {
+    return Intl.message(
+      'Checkout',
+      name: 'checkout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No items in cart`
+  String get noItemsInCart {
+    return Intl.message(
+      'No items in cart',
+      name: 'noItemsInCart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total ({count} items): `
+  String total(Object count) {
+    return Intl.message(
+      'Total ($count items): ',
+      name: 'total',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Search Categories`
+  String get searchCategories {
+    return Intl.message(
+      'Search Categories',
+      name: 'searchCategories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filter`
+  String get filter {
+    return Intl.message(
+      'Filter',
+      name: 'filter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No categories found`
+  String get noCategoriesFound {
+    return Intl.message(
+      'No categories found',
+      name: 'noCategoriesFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alert`
+  String get alertTitle {
+    return Intl.message(
+      'Alert',
+      name: 'alertTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product added to cart`
+  String get productAddedToCart {
+    return Intl.message(
+      'Product added to cart',
+      name: 'productAddedToCart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to add product to cart`
+  String get failedToAddProductToCart {
+    return Intl.message(
+      'Failed to add product to cart',
+      name: 'failedToAddProductToCart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available in stock`
+  String get availableInStock {
+    return Intl.message(
+      'Available in stock',
+      name: 'availableInStock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Color`
+  String get selectColor {
+    return Intl.message(
+      'Select Color',
+      name: 'selectColor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Size`
+  String get selectSize {
+    return Intl.message(
+      'Select Size',
+      name: 'selectSize',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price`
+  String get price {
+    return Intl.message(
+      'Price',
+      name: 'price',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add to Cart`
+  String get addToCart {
+    return Intl.message(
+      'Add to Cart',
+      name: 'addToCart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select size and color`
+  String get selectSizeAndColor {
+    return Intl.message(
+      'Please select size and color',
+      name: 'selectSizeAndColor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(320 Reviews)`
+  String get reviews {
+    return Intl.message(
+      '(320 Reviews)',
+      name: 'reviews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No products available`
+  String get noProductsAvailable {
+    return Intl.message(
+      'No products available',
+      name: 'noProductsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No results found`
+  String get noResultsFound {
+    return Intl.message(
+      'No results found',
+      name: 'noResultsFound',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -23,7 +23,7 @@ class ProductModel extends ProductEntity {
       creationAt: json['creationAt'],
       updatedAt: json['updatedAt'],
       category: CategoryModel.fromJson(
-          json['category']), // Correctly cast to CategoryEntity
+          json['category']),
     );
   }
 

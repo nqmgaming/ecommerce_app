@@ -15,18 +15,22 @@ class SocialButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: isLast ? 0 : 10),
+      padding: EdgeInsets.only(right: isLast ? 0 : 5),
       child: TextButton(
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero,
+          foregroundColor: Colors.black,
         ),
         onPressed: () {
           onPressed();
         },
-        child: Image.asset(
-          imageAsset,
-          width: 50,
-          height: 50,
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Image.asset(
+            imageAsset,
+            width: 50,
+            height: 50,
+          ),
         ),
       ),
     );

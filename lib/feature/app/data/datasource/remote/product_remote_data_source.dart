@@ -86,10 +86,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
         for (var item in response.data) {
           products.add(ProductModel.fromJson(item));
         }
-        // remove image link contain "https://placeimg.com/100/100/any"
-        return products
-            .where((product) => !product.images.any((image) => image.contains('https://placeimg.com')))
-            .toList();
+        return products;
       } else {
         throw Exception('Failed to get products: ${response.statusCode}');
       }

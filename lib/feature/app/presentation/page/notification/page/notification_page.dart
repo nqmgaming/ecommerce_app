@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/core/utils/convert_date.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/notification/bloc/notification_bloc.dart';
+import 'package:ecommerce_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -12,21 +14,32 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
+  String? _userId;
+
+  void _getUserIdAddData() async {
+    const storage = FlutterSecureStorage();
+    _userId = await storage.read(key: 'userId');
+    if (mounted) {
+      context.read<NotificationBloc>().add(GetNotificationEvent(_userId!));
+    }
+  }
+
   @override
   void initState() {
-    context.read<NotificationBloc>().add(GetNotificationEvent("1"));
+    _getUserIdAddData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final delegate = S.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        title: const Text(
-          'Notifications',
-          style: TextStyle(
+        title: Text(
+          delegate.notificationsTitle,
+          style: const TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
@@ -69,11 +82,11 @@ class _NotificationPageState extends State<NotificationPage> {
           }
 
           if (state is NotificationAdded) {
-            context.read<NotificationBloc>().add(GetNotificationEvent("1"));
+            context.read<NotificationBloc>().add(GetNotificationEvent(_userId!));
           }
 
           if (state is NotificationRead) {
-            context.read<NotificationBloc>().add(GetNotificationEvent("1"));
+            context.read<NotificationBloc>().add(GetNotificationEvent(_userId!));
           }
         },
         builder: (context, state) {
@@ -84,19 +97,19 @@ class _NotificationPageState extends State<NotificationPage> {
           } else if (state is NotificationLoaded) {
             final notifications = state.notifications;
             if (notifications.isEmpty) {
-              return const Center(
+              return Center(
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.notifications_off,
                         size: 100,
                         color: Colors.grey,
                       ),
                       Text(
-                        'No notifications',
-                        style: TextStyle(
+                        delegate.noNotifications,
+                        style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 20,
                         ),
@@ -219,8 +232,24 @@ class _NotificationPageState extends State<NotificationPage> {
               },
             );
           } else {
-            return const Center(
-              child: Text('No notifications'),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.notifications_off,
+                    size: 100,
+                    color: Colors.grey,
+                  ),
+                  Text(
+                    delegate.noNotifications,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
             );
           }
         },

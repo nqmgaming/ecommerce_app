@@ -1,7 +1,10 @@
+import 'package:ecommerce_app/core/constants/images_constant.dart';
 import 'package:ecommerce_app/core/utils/user_session.dart';
 import 'package:ecommerce_app/feature/auth/presentation/page/login_page.dart';
+import 'package:ecommerce_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -25,10 +28,11 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final delegate = S.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Profile"),
+        title: Text(delegate.profilePageTitle),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -46,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   } else if (snapshot.hasError) {
                     return const CircleAvatar(
                       radius: 50,
-                      backgroundImage: AssetImage('assets/default_avatar.png'),
+                      backgroundImage: AssetImage(ImageConstant.defaultAvatar),
                     );
                   } else {
                     return CircleAvatar(
@@ -63,9 +67,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator();
                   } else if (snapshot.hasError) {
-                    return const Text(
-                      'Error loading name',
-                      style: TextStyle(
+                    return Text(
+                      delegate.errorLoadingName,
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
@@ -88,9 +92,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator();
                   } else if (snapshot.hasError) {
-                    return const Text(
-                      'Error loading email',
-                      style: TextStyle(
+                    return Text(
+                      delegate.errorLoadingEmail,
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
                       ),
@@ -121,7 +125,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         context, LoginPage.route(), (route) => false);
                   }
                 },
-                child: const Text("Logout"),
+                child: Text(delegate.logoutButton),
               ),
             ],
           ),

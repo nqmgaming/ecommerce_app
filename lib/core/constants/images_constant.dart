@@ -6,4 +6,5 @@ class ImageConstant {
   static const icGoogle = 'assets/images/ic_google.png';
   static const icFacebook = 'assets/images/ic_facebook.png';
   static const icApple = 'assets/images/ic_apple.png';
+  static const defaultAvatar = 'assets/images/default_avatar.png';
 }

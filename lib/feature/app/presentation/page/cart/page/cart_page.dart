@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/feature/app/presentation/page/cart/bloc/cart_bloc.dart';
 import 'package:ecommerce_app/feature/app/presentation/widget/increase_decrease_button.dart';
+import 'package:ecommerce_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -46,18 +47,19 @@ class _CartPageState extends State<CartPage> {
     if (_cartLength < 0) {
       return;
     } else {
+      final delegate = S.of(context);
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Order Successful'),
-            content: const Text('Your order has been placed successfully'),
+            title: Text(delegate.orderSuccessfulTitle),
+            content: Text(delegate.orderSuccessfulContent),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('Yes'),
+                child: Text(delegate.okCaption),
               ),
             ],
           );
@@ -68,6 +70,7 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    final delegate = S.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: _buildAppBar(),
@@ -128,7 +131,7 @@ class _CartPageState extends State<CartPage> {
                         child: Row(
                           children: [
                             Text(
-                              'Total ($_cartLength items): ',
+                              delegate.total(_cartLength),
                               style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -160,20 +163,20 @@ class _CartPageState extends State<CartPage> {
                               ),
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10)),
-                          child: const SizedBox(
+                          child: SizedBox(
                             height: 50,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Checkout',
-                                  style: TextStyle(
+                                  delegate.checkout,
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.arrow_circle_right_sharp,
                                   color: Colors.white,
                                 ),
@@ -194,6 +197,7 @@ class _CartPageState extends State<CartPage> {
   }
 
   AppBar _buildAppBar() {
+    final delegate = S.of(context);
     return AppBar(
       surfaceTintColor: Colors.white,
       centerTitle: true,
@@ -208,9 +212,9 @@ class _CartPageState extends State<CartPage> {
               },
             )
           : null,
-      title: const Text(
-        'Cart',
-        style: TextStyle(
+      title: Text(
+        delegate.cartLabel,
+        style: const TextStyle(
           color: Colors.black,
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -271,7 +275,6 @@ class _CartPageState extends State<CartPage> {
         }
 
         final cart = state.cart[index];
-        print(cart.color);
         return Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
@@ -392,18 +395,19 @@ class _CartPageState extends State<CartPage> {
   }
 
   Widget _buildEmptyCartMessage() {
-    return const Center(
+    final delegate = S.of(context);
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.shopping_bag_outlined,
             size: 100,
             color: Colors.grey,
           ),
           Text(
-            'No items in cart',
-            style: TextStyle(fontSize: 20, color: Colors.grey),
+            delegate.noItemsInCart,
+            style: const TextStyle(fontSize: 20, color: Colors.grey),
           ),
         ],
       ),

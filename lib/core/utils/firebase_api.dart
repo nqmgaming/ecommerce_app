@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:ecommerce_app/core/utils/user_session.dart';
 import 'package:ecommerce_app/feature/app/domain/entities/notification_entity.dart';
 import 'package:ecommerce_app/feature/app/domain/repositories/notification_repository.dart';

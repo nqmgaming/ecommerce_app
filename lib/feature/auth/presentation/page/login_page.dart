@@ -153,7 +153,14 @@ class _LoginPageState extends State<LoginPage> {
                       isLoading: state is AuthLoading,
                     ),
                     const SizedBox(height: 16),
-                    Text(delegate.orLoginWith),
+                    Text(
+                      delegate.orLoginWith,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontFamily: FontConstants.productSansRegular,
+                      ),
+                    ),
                     const SizedBox(height: 16),
                     Align(
                       alignment: Alignment.center,
@@ -184,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                         text: delegate.dontHaveAccount,
                         style: const TextStyle(
                           color: Colors.black,
-                          fontSize: 14,
+                          fontSize: 16,
                           fontFamily: FontConstants.productSansRegular,
                         ),
                         children: [
@@ -192,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                             text: delegate.signUp,
                             style: const TextStyle(
                               color: Colors.black,
-                              fontSize: 14,
+                              fontSize: 16,
                               fontFamily: FontConstants.productSansBold,
                               decoration: TextDecoration.underline,
                             ),

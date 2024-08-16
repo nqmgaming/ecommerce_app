@@ -44,6 +44,7 @@ class CustomBottomNavigationBarItem extends StatelessWidget {
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 9,
+                letterSpacing: 0.1
               ),
             ),
           ),

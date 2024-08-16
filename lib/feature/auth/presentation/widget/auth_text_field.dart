@@ -38,11 +38,11 @@ class _AuthTextFieldState extends State<AuthTextField> {
       },
       cursorColor: Colors.black,
       decoration: InputDecoration(
-        hintStyle: TextStyle(
-            color: Colors.black.withOpacity(0.8),
-            fontSize: 14,
-            fontWeight: FontWeight.w400),
-        hintText: widget.hintText,
+        label: Text(widget.hintText),
+        labelStyle: const TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.w500,
+        ),
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.grey),
         ),

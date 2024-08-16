@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/feature/app/presentation/page/profile/page/profile_page.dart';
 import 'package:ecommerce_app/feature/app/presentation/widget/custom_bottom_navigation_bar_item.dart';
+import 'package:ecommerce_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 import 'cart/page/cart_page.dart';
@@ -30,11 +31,14 @@ class _AppPageState extends State<AppPage> {
   Widget build(BuildContext context) {
     List<Widget> widgetOptions = [
       const HomePage(),
-      const CartPage(isMain: false,),
+      const CartPage(
+        isMain: false,
+      ),
       const NotificationPage(),
       const ProfilePage()
     ];
 
+    final delegate = S.of(context);
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
@@ -59,7 +63,7 @@ class _AppPageState extends State<AppPage> {
               BottomNavigationBarItem(
                 icon: CustomBottomNavigationBarItem(
                   icon: Icons.home_rounded,
-                  label: 'Home',
+                  label: delegate.homeLabel,
                   isSelected: _selectedIndex == 0,
                 ),
                 label: '',
@@ -67,7 +71,7 @@ class _AppPageState extends State<AppPage> {
               BottomNavigationBarItem(
                 icon: CustomBottomNavigationBarItem(
                   icon: Icons.shopping_cart_rounded,
-                  label: 'Cart',
+                  label: delegate.cartLabel,
                   isSelected: _selectedIndex == 1,
                 ),
                 label: '',
@@ -75,7 +79,7 @@ class _AppPageState extends State<AppPage> {
               BottomNavigationBarItem(
                 icon: CustomBottomNavigationBarItem(
                   icon: Icons.notifications_rounded,
-                  label: 'Alert',
+                  label: delegate.alertLabel,
                   isSelected: _selectedIndex == 2,
                 ),
                 label: '',
@@ -83,7 +87,7 @@ class _AppPageState extends State<AppPage> {
               BottomNavigationBarItem(
                 icon: CustomBottomNavigationBarItem(
                   icon: Icons.person_rounded,
-                  label: 'Profile',
+                  label: delegate.profileLabel,
                   isSelected: _selectedIndex == 3,
                 ),
                 label: '',

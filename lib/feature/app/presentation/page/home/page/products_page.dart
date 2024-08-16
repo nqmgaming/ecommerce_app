@@ -4,6 +4,7 @@ import 'package:ecommerce_app/feature/app/presentation/page/app_page.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/cart/page/cart_page.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/home/bloc/home_bloc.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/home/page/product_detail_page.dart';
+import 'package:ecommerce_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,6 +30,7 @@ class _ProductsPageState extends State<ProductsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final delegate = S.of(context);
     return PopScope(
       canPop: false,
       onPopInvoked: (bool didPop) async {
@@ -146,19 +148,19 @@ class _ProductsPageState extends State<ProductsPage> {
                 );
               } else if (state is ProductLoaded) {
                 if (state.products.isEmpty) {
-                  return const Center(
+                  return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.info_outline,
                           size: 80,
                           color: Colors.grey,
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         Text(
-                          'No products available',
-                          style: TextStyle(
+                          delegate.noProductsAvailable,
+                          style: const TextStyle(
                             fontSize: 18,
                             color: Colors.grey,
                           ),
@@ -175,6 +177,7 @@ class _ProductsPageState extends State<ProductsPage> {
                   itemCount: state.products.length,
                   itemBuilder: (context, index) {
                     final product = state.products[index];
+                    bool isFavorite = false;
                     return GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -210,18 +213,24 @@ class _ProductsPageState extends State<ProductsPage> {
                                     ),
                                   ),
                                   Positioned(
-                                    top: 5,
-                                    right: 5,
+                                    top: 15,
+                                    right: 15,
                                     child: Container(
                                       decoration: BoxDecoration(
-                                        color: Colors.black.withOpacity(0.5),
+                                        color: Colors.black,
                                         borderRadius: BorderRadius.circular(30),
                                       ),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(5),
-                                        child: Icon(
-                                          Icons.favorite_border,
-                                          color: Colors.white,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            isFavorite = !isFavorite;
+                                          },
+                                          child: const Icon(
+                                            Icons.favorite_border,
+                                            color: Colors.white,
+                                            size: 15,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -270,8 +279,8 @@ class _ProductsPageState extends State<ProductsPage> {
                   child: Text(state.message),
                 );
               } else {
-                return const Center(
-                  child: Text('No results found'),
+                return Center(
+                  child: Text(delegate.noResultsFound),
                 );
               }
             },

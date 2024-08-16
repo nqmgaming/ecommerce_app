@@ -1,7 +1,7 @@
 import 'package:ecommerce_app/core/constants/fonts_constant.dart';
 import 'package:ecommerce_app/core/constants/images_constant.dart';
 import 'package:ecommerce_app/feature/auth/presentation/page/login_page.dart';
-import 'package:ecommerce_app/feature/auth/presentation/widget/blur_button.dart';
+import 'package:ecommerce_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,21 +50,22 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   List<Widget> _buildPages() {
+    final localizations = S.of(context);
     return [
       _buildPage(
         image: ImageConstant.intro1,
-        title: 'Discover something new',
-        description: 'Special new arrivals just for you',
+        title: localizations.discoverSomethingNew,
+        description: localizations.specialNewArrivals,
       ),
       _buildPage(
         image: ImageConstant.intro2,
-        title: 'Update trendy outfit',
-        description: 'Favorite brands and hottest trends',
+        title: localizations.updateTrendyOutfit,
+        description: localizations.favoriteBrands,
       ),
       _buildPage(
         image: ImageConstant.intro3,
-        title: 'Explore your true style',
-        description: 'Relax and let us bring the style to you',
+        title: localizations.exploreTrueStyle,
+        description: localizations.relaxBringStyle,
       ),
     ];
   }
@@ -78,20 +79,49 @@ class _OnboardingPageState extends State<OnboardingPage> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const SizedBox(height: 30),
-        Text(title,
-            style: const TextStyle(
-                fontSize: 18,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(30),
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.45,
+                width: MediaQuery.of(context).size.width,
+                transform: Matrix4.skewY(-0.04),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(image),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.grey.withOpacity(0.3),
+                    width: 1,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 30,
                 fontWeight: FontWeight.bold,
-                fontFamily: FontConstants.productSansBold)),
-        const SizedBox(height: 10),
-        Text(description,
-            style: const TextStyle(
-                fontSize: 12, fontFamily: FontConstants.productSansRegular),
-            textAlign: TextAlign.center),
-        const SizedBox(height: 20),
-        Image.asset(image, height: 350),
-        const SizedBox(height: 20),
+                fontFamily: FontConstants.productSansBold,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              description,
+              style: const TextStyle(
+                fontSize: 17,
+                fontFamily: FontConstants.productSansRegular,
+                color: Colors.grey,
+              ),
+            )
+          ],
+        ),
       ],
     );
   }
@@ -99,67 +129,69 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white, Colors.black.withOpacity(0.5)],
-            stops: const [0.5, 0.5],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Stack(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
           children: [
-            Swiper(
-              onIndexChanged: (int page) {
-                setState(() {
-                  _currentPage = page;
-                });
-              },
-              itemBuilder: (BuildContext context, int index) {
-                return _buildPages()[index];
-              },
-              itemCount: _buildPages().length,
-              layout: SwiperLayout.DEFAULT,
-              itemWidth: MediaQuery.of(context).size.width,
-              itemHeight: MediaQuery.of(context).size.height,
-              viewportFraction: 0.65,
-              scale: 0.7,
-              autoplay: true,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.7,
+              child: Swiper(
+                onIndexChanged: (int page) {
+                  setState(() {
+                    _currentPage = page;
+                  });
+                },
+                itemBuilder: (BuildContext context, int index) {
+                  return _buildPages()[index];
+                },
+                itemCount: _buildPages().length,
+                layout: SwiperLayout.DEFAULT,
+                itemWidth: MediaQuery.of(context).size.width,
+                itemHeight: MediaQuery.of(context).size.height,
+                autoplay: false,
+              ),
             ),
-            Positioned(
-              bottom: 100,
-              left: 0,
-              right: 0,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      _buildPages().length,
-                      (index) => AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        height: 10,
-                        width: _currentPage == index ? 20 : 10,
-                        decoration: BoxDecoration(
-                          color:
-                              _currentPage == index ? Colors.blue : Colors.grey,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
+            Row(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: List.generate(
+                    _buildPages().length,
+                    (index) => AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      margin: const EdgeInsets.symmetric(horizontal: 2),
+                      height: 8,
+                      width: _currentPage == index ? 25 : 10,
+                      decoration: BoxDecoration(
+                        color:
+                            _currentPage == index ? Colors.black : Colors.grey,
+                        borderRadius: BorderRadius.circular(5),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  BlurButton(
-                      onPressed: () async {
-                        await _setOnboardingSeen();
-                        _checkMounted();
-                      },
-                      title: "Shopping Now")
-                ],
-              ),
+                ),
+                const Spacer(),
+                IconButton(
+                  onPressed: () async {
+                    await _setOnboardingSeen();
+                    _checkMounted();
+                  },
+                  icon: Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              ],
             ),
           ],
         ),

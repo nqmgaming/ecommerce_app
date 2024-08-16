@@ -5,6 +5,7 @@ import 'package:ecommerce_app/feature/app/domain/entities/product_entity.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/cart/bloc/cart_bloc.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/cart/page/cart_page.dart';
 import 'package:ecommerce_app/feature/app/presentation/widget/increase_decrease_button.dart';
+import 'package:ecommerce_app/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,11 +45,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   int? _userId;
 
   void _showAlertDialog(BuildContext context, String message, Function onOk) {
+    final delegate = S.of(context);
     showCupertinoDialog(
       context: context,
       builder: (context) {
         return CupertinoAlertDialog(
-          title: const Text("Alert"),
+          title: Text(delegate.alertTitle),
           content: Text(message),
           actions: [
             CupertinoDialogAction(
@@ -79,6 +81,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final delegate = S.of(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -108,10 +111,18 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               decoration: const BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 10,
+                    spreadRadius: 1,
+                  ),
+                ],
               ),
               child: const Icon(
                 Icons.shopping_cart,
                 color: Colors.black,
+                size: 18,
               ),
             ),
             onPressed: () {
@@ -128,14 +139,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           if (state is CartAdded) {
             _showAlertDialog(
               context,
-              "Product added to cart",
+              delegate.productAddedToCart,
               () {},
             );
           }
           if (state is CartError) {
             _showAlertDialog(
               context,
-              "Failed to add product to cart",
+              delegate.failedToAddProductToCart,
               () {},
             );
           }
@@ -314,9 +325,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                           ),
                                           onRatingUpdate: (rating) {},
                                         ),
-                                        const Text(
-                                          "(320 Reviews)",
-                                          style: TextStyle(
+                                        Text(
+                                          delegate.reviews,
+                                          style: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black,
@@ -340,12 +351,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                   const SizedBox(
                                     height: 15,
                                   ),
-                                  const Text("Available in stock",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                      )),
+                                  Text(
+                                    delegate.availableInStock,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
                                 ],
                               )
                             ],
@@ -357,9 +370,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text(
-                            "Select Color",
-                            style: TextStyle(
+                          Text(
+                            delegate.selectColor,
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
@@ -398,9 +411,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text(
-                            "Select Size",
-                            style: TextStyle(
+                          Text(
+                            delegate.selectSize,
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
@@ -441,7 +454,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                       style: TextStyle(
                                           color: _sizeSelected == _sizes[index]
                                               ? Colors.white
-                                              : Colors.black,
+                                              : Colors.grey,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 12),
                                       textAlign: TextAlign.center,
@@ -454,9 +467,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text(
-                            "Description",
-                            style: TextStyle(
+                          Text(
+                            delegate.description,
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
@@ -507,9 +520,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Price",
-                              style: TextStyle(
+                            Text(
+                              delegate.price,
+                              style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,
                                 color: Colors.grey,
@@ -518,7 +531,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             Text(
                               "\$${widget.product.price}.00",
                               style: const TextStyle(
-                                fontSize: 22,
+                                fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
                               ),
@@ -528,51 +541,56 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       ),
                       const SizedBox(width: 40),
                       Expanded(
-                        flex: 2,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            // Add to cart
-                            if (_sizeSelected != null &&
-                                _colorSelected != null) {
-                              final cart = CartEntity(
-                                id: const Uuid().v4(),
-                                userId: _userId.toString(),
-                                productId: widget.product.id.toString(),
-                                productName: widget.product.title,
-                                productImage: widget.product.images[0],
-                                productPrice: widget.product.price,
-                                categoryId: widget.product.category.id,
-                                categoryName: widget.product.category.name,
-                                quantity: _cartCount,
-                                size: _sizeSelected!,
-                                color: _colorSelected!.value.toRadixString(16),
-                              );
-                              BlocProvider.of<CartBloc>(context)
-                                  .add(AddCart(cart));
-                            } else {
-                              _showAlertDialog(
-                                context,
-                                "Please select size and color",
-                                () {},
-                              );
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            foregroundColor: Colors.white,
+                        flex: 3,
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(40),
                           ),
-                          child: const Padding(
-                            padding: EdgeInsets.all(16),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Add to cart
+                              if (_sizeSelected != null &&
+                                  _colorSelected != null) {
+                                final cart = CartEntity(
+                                  id: const Uuid().v4(),
+                                  userId: _userId.toString(),
+                                  productId: widget.product.id.toString(),
+                                  productName: widget.product.title,
+                                  productImage: widget.product.images[0],
+                                  productPrice: widget.product.price,
+                                  categoryId: widget.product.category.id,
+                                  categoryName: widget.product.category.name,
+                                  quantity: _cartCount,
+                                  size: _sizeSelected!,
+                                  color:
+                                      _colorSelected!.value.toRadixString(16),
+                                );
+                                BlocProvider.of<CartBloc>(context)
+                                    .add(AddCart(cart));
+                              } else {
+                                _showAlertDialog(
+                                  context,
+                                  delegate.selectSizeAndColor,
+                                  () {},
+                                );
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40),
+                              ),
+                              foregroundColor: Colors.white,
+                            ),
                             child: Row(children: [
-                              Icon(Icons.shopping_cart),
-                              SizedBox(width: 10),
+                              const Icon(Icons.shopping_cart),
+                              const SizedBox(width: 10),
                               Text(
-                                "Add to Cart",
-                                style: TextStyle(
-                                  fontSize: 16,
+                                delegate.addToCart,
+                                style: const TextStyle(
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
