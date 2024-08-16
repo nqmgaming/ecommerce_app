@@ -131,10 +131,6 @@ class _MyAppState extends State<MyApp> {
             child: BlocConsumer<AppBloc, AppState>(
               listener: (context, state) {
                 if (state is AppLanguageChanged) {
-                  setState(() {
-                    _locale = state.locale.languageCode;
-                  });
-
                   // save locale to SharedPreferences
                   SharedPreferences.getInstance().then((prefs) {
                     prefs.setString('locale', state.locale.languageCode);
@@ -150,7 +146,11 @@ class _MyAppState extends State<MyApp> {
                     GlobalCupertinoLocalizations.delegate,
                   ],
                   supportedLocales: S.delegate.supportedLocales,
-                  locale: Locale(_locale ?? 'en'),
+                  locale: state is AppLanguageChanged
+                      ? state.locale
+                      : _locale != null
+                          ? Locale(_locale!)
+                          : const Locale('en'),
                   theme: ThemeData(
                     appBarTheme: const AppBarTheme(
                       backgroundColor: Colors.white,

@@ -129,7 +129,13 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               const SizedBox(height: 20),
               DropdownButton<Locale>(
-                value: _selectedLocale,
+                value: _selectedLocale ?? Localizations.localeOf(context),
+                dropdownColor: ColorsConstant.whiteColor,
+                borderRadius: BorderRadius.circular(10),
+                underline: Container(
+                  height: 2,
+                  color: ColorsConstant.redColor,
+                ),
                 items: const [
                   DropdownMenuItem(
                     value: Locale('en'),
@@ -151,6 +157,13 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorsConstant.buttonColor,
+                  foregroundColor: ColorsConstant.whiteColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 onPressed: () async {
                   // Remove access_token from secure storage
                   const secureStorage = FlutterSecureStorage();
