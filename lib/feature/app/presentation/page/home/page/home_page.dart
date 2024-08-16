@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         surfaceTintColor: ColorsConstant.whiteColor,
+        leading: null,
         title: Container(
           color: ColorsConstant.whiteColor,
           child: Card(

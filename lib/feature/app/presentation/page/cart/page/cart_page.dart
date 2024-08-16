@@ -45,28 +45,24 @@ class _CartPageState extends State<CartPage> {
   }
 
   void _showAlertDialog(BuildContext context) {
-    if (_cartLength < 0) {
-      return;
-    } else {
-      final delegate = S.of(context);
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(delegate.orderSuccessfulTitle),
-            content: Text(delegate.orderSuccessfulContent),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text(delegate.okCaption),
-              ),
-            ],
-          );
-        },
-      );
-    }
+    final delegate = S.of(context);
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(delegate.orderSuccessfulTitle),
+          content: Text(delegate.orderSuccessfulContent),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(delegate.okCaption),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -91,6 +87,8 @@ class _CartPageState extends State<CartPage> {
           } else if (state is CartUpdated || state is CartRemoved) {
             BlocProvider.of<CartBloc>(context).add(GetCart(_userId.toString()));
           } else if (state is CartRemovedAll) {
+            BlocProvider.of<CartBloc>(context)
+                .add(GetCart(_userId.toString()));
             _showAlertDialog(context);
           }
         },

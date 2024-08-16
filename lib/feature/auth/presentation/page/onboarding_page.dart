@@ -115,10 +115,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
             const SizedBox(height: 10),
             Text(
               description,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 17,
                 fontFamily: FontConstants.productSansRegular,
-                color: ColorsConstant.greyColor,
+                color: ColorsConstant.blackColor.withOpacity(0.7),
               ),
             )
           ],
@@ -147,6 +147,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 itemBuilder: (BuildContext context, int index) {
                   return _buildPages()[index];
                 },
+                fade: 0.5,
+                scale: 0.9,
                 itemCount: _buildPages().length,
                 layout: SwiperLayout.DEFAULT,
                 itemWidth: MediaQuery.of(context).size.width,

@@ -5,7 +5,7 @@ class ColorsConstant {
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color blackColor = Color(0xFF000000);
   static const Color transparentColor = Color(0x00000000);
-  static const Color greyColor = Color(0xFFE0E0E0);
+  static const Color greyColor = Colors.grey;
   static const Color buttonColor = Color(0xFF2D201C);
   static const Color amberColor = Color(0xFFFFC107);
 }

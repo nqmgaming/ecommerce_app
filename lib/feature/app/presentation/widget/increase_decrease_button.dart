@@ -46,7 +46,7 @@ class _IncreaseDecreaseButtonState extends State<IncreaseDecreaseButton> {
       height: 40,
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: ColorsConstant.greyColor,
+        color: ColorsConstant.greyColor.withOpacity(0.3),
         borderRadius: BorderRadius.circular(40),
       ),
       child: Row(
