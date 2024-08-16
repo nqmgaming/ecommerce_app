@@ -1,10 +1,12 @@
 import 'package:ecommerce_app/core/common/widget/app_text_button.dart';
 import 'package:ecommerce_app/core/constants/fonts_constant.dart';
+import 'package:ecommerce_app/core/constants/images_constant.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/app_page.dart';
 import 'package:ecommerce_app/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ecommerce_app/feature/auth/presentation/widget/auth_button.dart';
 import 'package:ecommerce_app/feature/auth/presentation/widget/auth_text_field.dart';
 import 'package:ecommerce_app/feature/auth/presentation/widget/social_button.dart';
+import 'package:ecommerce_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,8 +35,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final delegate = S.of(context);
     return Scaffold(
-      resizeToAvoidBottomInset : false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.white,
         foregroundColor: Colors.white,
@@ -73,11 +76,11 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    const Align(
+                    Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        "Log into\nyour account",
-                        style: TextStyle(
+                        delegate.loginTitle,
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w500,
                           fontFamily: FontConstants.productSansBold,
@@ -89,15 +92,15 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 30),
                     AuthTextField(
                       controller: _emailController,
-                      hintText: "Email address",
+                      hintText: delegate.emailHint,
                       validator: (value) {
                         // regex for email validation
-                        final emailRegex = RegExp(
-                            r'^.+@[a-zA-Z]+\.[a-zA-Z]+(\.?[a-zA-Z]+)$');
+                        final emailRegex =
+                            RegExp(r'^.+@[a-zA-Z]+\.[a-zA-Z]+(\.?[a-zA-Z]+)$');
                         if (value!.isEmpty) {
-                          return "Email is required";
+                          return delegate.emailRequired;
                         } else if (!emailRegex.hasMatch(value)) {
-                          return "Invalid email address";
+                          return delegate.invalidEmail;
                         } else {
                           return null;
                         }
@@ -106,13 +109,13 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 16),
                     AuthTextField(
                       controller: _passwordController,
-                      hintText: "Password",
+                      hintText: delegate.passwordHint,
                       obscureText: true,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Password is required";
+                          return delegate.passwordRequired;
                         } else if (value.length < 6) {
-                          return "Password must be at least 6 characters";
+                          return delegate.passwordTooShort;
                         } else {
                           return null;
                         }
@@ -124,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                       alignment: Alignment.centerRight,
                       child: AppTextButton(
                         onPressed: () {},
-                        text: "Forgot password?",
+                        text: delegate.forgotPassword,
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -139,19 +142,18 @@ class _LoginPageState extends State<LoginPage> {
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content:
-                                  Text("Please fill in the required fields"),
+                            SnackBar(
+                              content: Text(delegate.pleaseFillRequired),
                               backgroundColor: Colors.red,
                             ),
                           );
                         }
                       },
-                      title: "Log in",
+                      title: delegate.loginButton,
                       isLoading: state is AuthLoading,
                     ),
                     const SizedBox(height: 16),
-                    const Text("Or log in with"),
+                    Text(delegate.orLoginWith),
                     const SizedBox(height: 16),
                     Align(
                       alignment: Alignment.center,
@@ -160,15 +162,15 @@ class _LoginPageState extends State<LoginPage> {
                         children: <Widget>[
                           SocialButton(
                             onPressed: () {},
-                            imageAsset: "assets/images/ic_google.png",
+                            imageAsset: ImageConstant.icGoogle,
                           ),
                           SocialButton(
                             onPressed: () {},
-                            imageAsset: "assets/images/ic_facebook.png",
+                            imageAsset: ImageConstant.icFacebook,
                           ),
                           SocialButton(
                             onPressed: () {},
-                            imageAsset: "assets/images/ic_apple.png",
+                            imageAsset: ImageConstant.icApple,
                             isLast: true,
                           ),
                         ],
@@ -178,17 +180,17 @@ class _LoginPageState extends State<LoginPage> {
                     GestureDetector(
                       onTap: () {},
                       child: RichText(
-                          text: const TextSpan(
-                        text: "Don't have an account? ",
-                        style: TextStyle(
+                          text: TextSpan(
+                        text: delegate.dontHaveAccount,
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14,
                           fontFamily: FontConstants.productSansRegular,
                         ),
                         children: [
                           TextSpan(
-                            text: "Sign up",
-                            style: TextStyle(
+                            text: delegate.signUp,
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontFamily: FontConstants.productSansBold,

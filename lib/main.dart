@@ -6,9 +6,12 @@ import 'package:ecommerce_app/feature/app/presentation/page/notification/bloc/no
 import 'package:ecommerce_app/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:ecommerce_app/feature/auth/presentation/page/login_page.dart';
 import 'package:ecommerce_app/feature/auth/presentation/page/welcome_page.dart';
+import 'package:ecommerce_app/generated/l10n.dart';
 import 'package:ecommerce_app/injection.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -38,6 +41,7 @@ class AppInitializer {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+    await FirebaseMessaging.instance.setAutoInitEnabled(true);
   }
 
   static Future<void> _initializeNotifications() async {
@@ -112,6 +116,14 @@ class _MyAppState extends State<MyApp> {
               ),
             ],
             child: MaterialApp(
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: S.delegate.supportedLocales,
+              locale: const Locale('vi'),
               theme: ThemeData(
                 appBarTheme: const AppBarTheme(
                   backgroundColor: Colors.white,

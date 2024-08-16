@@ -3,6 +3,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:ecommerce_app/feature/app/domain/entities/cart_entity.dart';
 import 'package:ecommerce_app/feature/app/domain/entities/product_entity.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/cart/bloc/cart_bloc.dart';
+import 'package:ecommerce_app/feature/app/presentation/page/cart/page/cart_page.dart';
 import 'package:ecommerce_app/feature/app/presentation/widget/increase_decrease_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -113,7 +114,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 color: Colors.black,
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                CartPage.route(isMain: true),
+              );
+            },
           ),
         ],
       ),
@@ -539,7 +545,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 categoryName: widget.product.category.name,
                                 quantity: _cartCount,
                                 size: _sizeSelected!,
-                                color: _colorSelected.toString(),
+                                color: _colorSelected!.value.toRadixString(16),
                               );
                               BlocProvider.of<CartBloc>(context)
                                   .add(AddCart(cart));

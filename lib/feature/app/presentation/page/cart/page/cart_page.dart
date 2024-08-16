@@ -5,7 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({super.key});
+  static route({bool isMain = false}) {
+    return MaterialPageRoute(
+      builder: (context) => CartPage(isMain: isMain),
+    );
+  }
+
+  final bool isMain;
+
+  const CartPage({super.key, required this.isMain});
 
   @override
   State<CartPage> createState() => _CartPageState();
@@ -34,6 +42,30 @@ class _CartPageState extends State<CartPage> {
     }
   }
 
+  void _showAlertDialog(BuildContext context) {
+    if (_cartLength < 0) {
+      return;
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Order Successful'),
+            content: const Text('Your order has been placed successfully'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Yes'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +86,8 @@ class _CartPageState extends State<CartPage> {
             _showErrorSnackBar(context, state.message);
           } else if (state is CartUpdated || state is CartRemoved) {
             BlocProvider.of<CartBloc>(context).add(GetCart(_userId.toString()));
+          } else if (state is CartRemovedAll) {
+            _showAlertDialog(context);
           }
         },
         buildWhen: (previous, current) => current is CartLoaded,
@@ -163,6 +197,17 @@ class _CartPageState extends State<CartPage> {
     return AppBar(
       surfaceTintColor: Colors.white,
       centerTitle: true,
+      leading: widget.isMain
+          ? IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          : null,
       title: const Text(
         'Cart',
         style: TextStyle(
@@ -222,11 +267,11 @@ class _CartPageState extends State<CartPage> {
       itemCount: state.cart.length + 1,
       itemBuilder: (context, index) {
         if (index == state.cart.length) {
-          return const SizedBox(height: 140); // Placeholder widget at the end
+          return const SizedBox(height: 140);
         }
 
-        final cart = state.cart[index]; // Safely access the cart item now
-
+        final cart = state.cart[index];
+        print(cart.color);
         return Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
@@ -260,14 +305,18 @@ class _CartPageState extends State<CartPage> {
               children: [
                 Container(
                   margin: const EdgeInsets.all(10),
-                  width: 100,
-                  height: 100,
+                  width: 120,
+                  height: 120,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(cart.productImage),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Color(int.parse('0xff${cart.color}')),
+                      width: 5,
+                    ),
                   ),
                 ),
                 Expanded(
@@ -291,6 +340,13 @@ class _CartPageState extends State<CartPage> {
                         ),
                         Text(
                           cart.categoryName,
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14,
+                          ),
+                        ),
+                        Text(
+                          "Size: ${cart.size}",
                           style: const TextStyle(
                             color: Colors.grey,
                             fontSize: 14,
@@ -347,10 +403,7 @@ class _CartPageState extends State<CartPage> {
           ),
           Text(
             'No items in cart',
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.grey
-            ),
+            style: TextStyle(fontSize: 20, color: Colors.grey),
           ),
         ],
       ),

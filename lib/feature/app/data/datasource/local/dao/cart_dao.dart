@@ -58,4 +58,16 @@ class CartDao {
     );
     return response;
   }
+
+  Future<Map<String, dynamic>?> getCartByProductIdSizeColor(String userId, String productId, String size, String color) async {
+    final response = await _database.query(
+      'Cart',
+      where: 'userId = ? AND productId = ? AND size = ? AND color = ?',
+      whereArgs: [userId, productId, size, color],
+    );
+    if (response.isNotEmpty) {
+      return response.first;
+    }
+    return null;
+  }
 }

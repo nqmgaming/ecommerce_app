@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ecommerce_app/core/utils/user_session.dart';
 import 'package:ecommerce_app/feature/app/domain/entities/notification_entity.dart';
 import 'package:ecommerce_app/feature/app/domain/repositories/notification_repository.dart';
@@ -10,8 +12,7 @@ import 'package:flutter/material.dart';
 
 class FirebaseApi {
   final _firebaseMessaging = FirebaseMessaging.instance;
-  final NotificationRepository _notificationRepository =
-      getIt<NotificationRepository>();
+  final NotificationRepository _notificationRepository = getIt<NotificationRepository>();
   final UserSession _userSession = UserSession();
   bool _isRequestingPermission = false;
 
@@ -21,12 +22,24 @@ class FirebaseApi {
     _isRequestingPermission = true;
     try {
       await _firebaseMessaging.requestPermission();
+
+      // Ensure APNS token is available
+      String? apnsToken = await _firebaseMessaging.getAPNSToken();
+      if (apnsToken == null) {
+        // Wait for the APNS token to be set
+        await Future.delayed(const Duration(seconds: 2));
+        apnsToken = await _firebaseMessaging.getAPNSToken();
+      }
+
+      if (apnsToken != null) {
+        final fcmToken = await _firebaseMessaging.getToken();
+        print('FCM Token: $fcmToken');
+      } else {
+        print('APNS token is not available.');
+      }
     } finally {
       _isRequestingPermission = false;
     }
-
-    final fcmToken = await _firebaseMessaging.getToken();
-    print('FCM Token: $fcmToken');
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       _handleMessage(message);
@@ -36,8 +49,7 @@ class FirebaseApi {
       _handleMessage(message);
     });
 
-    RemoteMessage? initialMessage =
-        await FirebaseMessaging.instance.getInitialMessage();
+    RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage != null) {
       _handleMessage(initialMessage);
     }

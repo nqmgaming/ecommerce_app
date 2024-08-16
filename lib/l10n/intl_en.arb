@@ -1,0 +1,16 @@
+{
+  "@@locale": "en",
+  "loginTitle": "Log into\nyour account",
+  "emailHint": "Email address",
+  "emailRequired": "Email is required",
+  "invalidEmail": "Invalid email address",
+  "passwordHint": "Password",
+  "passwordRequired": "Password is required",
+  "passwordTooShort": "Password must be at least 6 characters",
+  "forgotPassword": "Forgot password?",
+  "pleaseFillRequired": "Please fill in the required fields",
+  "loginButton": "Log in",
+  "orLoginWith": "Or log in with",
+  "dontHaveAccount": "Don't have an account? ",
+  "signUp": "Sign up"
+}

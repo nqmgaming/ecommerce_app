@@ -1,0 +1,16 @@
+{
+  "@@locale": "vi",
+  "loginTitle": "Đăng nhập\ntài khoản của bạn",
+  "emailHint": "Địa chỉ email",
+  "emailRequired": "Email là bắt buộc",
+  "invalidEmail": "Địa chỉ email không hợp lệ",
+  "passwordHint": "Mật khẩu",
+  "passwordRequired": "Mật khẩu là bắt buộc",
+  "passwordTooShort": "Mật khẩu phải có ít nhất 6 ký tự",
+  "forgotPassword": "Quên mật khẩu?",
+  "pleaseFillRequired": "Vui lòng điền vào các trường bắt buộc",
+  "loginButton": "Đăng nhập",
+  "orLoginWith": "Hoặc đăng nhập bằng",
+  "dontHaveAccount": "Chưa có tài khoản? ",
+  "signUp": "Đăng ký"
+}

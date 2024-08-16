@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/feature/app/domain/entities/category_entity.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/app_page.dart';
+import 'package:ecommerce_app/feature/app/presentation/page/cart/page/cart_page.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/home/bloc/home_bloc.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/home/page/product_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -100,7 +101,12 @@ class _ProductsPageState extends State<ProductsPage> {
             ),
             IconButton(
               icon: const Icon(Icons.shopping_cart),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  CartPage.route(isMain: true),
+                );
+              },
               color: Colors.black,
             ),
           ],

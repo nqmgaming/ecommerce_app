@@ -20,21 +20,27 @@ class CartRepositoryImpl implements CartRepository {
     try {
       final db = await _appDatabase.database;
       final cartDao = CartDao(db);
-      final cartModel = CartModel(
-        id: cart.id,
-        userId: cart.userId,
-        productId: cart.productId,
-        quantity: cart.quantity,
-        size: cart.size,
-        color: cart.color,
-        productName: cart.productName,
-        productImage: cart.productImage,
-        productPrice: cart.productPrice,
-        categoryId: cart.categoryId,
-        categoryName: cart.categoryName,
-        createdAt: cart.createdAt,
-      );
-      await cartDao.insertCart(cartModel);
+      final existingCart = await cartDao.getCartByProductIdSizeColor(cart.userId, cart.productId, cart.size, cart.color);
+      if (existingCart != null) {
+        final updatedQuantity = existingCart['quantity'] + cart.quantity;
+        await cartDao.updateCart(existingCart['id'], updatedQuantity);
+      } else {
+        final cartModel = CartModel(
+          id: cart.id,
+          userId: cart.userId,
+          productId: cart.productId,
+          quantity: cart.quantity,
+          size: cart.size,
+          color: cart.color,
+          productName: cart.productName,
+          productImage: cart.productImage,
+          productPrice: cart.productPrice,
+          categoryId: cart.categoryId,
+          categoryName: cart.categoryName,
+          createdAt: cart.createdAt,
+        );
+        await cartDao.insertCart(cartModel);
+      }
       return Right(cart);
     } catch (e) {
       return Left(Failure(message: e.toString()));
@@ -72,7 +78,7 @@ class CartRepositoryImpl implements CartRepository {
       final cartDao = CartDao(db);
       final carts = await cartDao.getAllCartByUser(userId);
       final cartEntities =
-          carts.map((cart) => CartModel.fromMap(cart)).toList();
+      carts.map((cart) => CartModel.fromMap(cart)).toList();
       return Right(cartEntities);
     } catch (e) {
       return Left(Failure(message: e.toString()));
