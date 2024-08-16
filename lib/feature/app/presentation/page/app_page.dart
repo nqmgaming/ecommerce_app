@@ -30,7 +30,7 @@ class _AppPageState extends State<AppPage> {
   Widget build(BuildContext context) {
     List<Widget> widgetOptions = [
       const HomePage(),
-      const CartPage(),
+      const CartPage(isMain: false,),
       const NotificationPage(),
       const ProfilePage()
     ];
