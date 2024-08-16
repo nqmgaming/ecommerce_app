@@ -1,10 +1,13 @@
+import 'package:ecommerce_app/core/bloc/app_bloc.dart';
 import 'package:ecommerce_app/core/constants/colors_constant.dart';
 import 'package:ecommerce_app/core/constants/images_constant.dart';
 import 'package:ecommerce_app/core/utils/user_session.dart';
 import 'package:ecommerce_app/feature/auth/presentation/page/login_page.dart';
 import 'package:ecommerce_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -17,6 +20,18 @@ class _ProfilePageState extends State<ProfilePage> {
   late Future<String> _userName;
   late Future<String> _userEmail;
   late Future<String> _avatarUrl;
+  Locale? _selectedLocale;
+
+  // get locale from SharedPreferences
+  void _getSelectedLocale() async {
+    final prefs = await SharedPreferences.getInstance();
+    final languageCode = prefs.getString('locale');
+    if (languageCode != null) {
+      setState(() {
+        _selectedLocale = Locale(languageCode);
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -25,6 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
     _userName = userSession.getName();
     _userEmail = userSession.getEmail();
     _avatarUrl = userSession.getAvatar();
+    _getSelectedLocale();
   }
 
   @override
@@ -108,6 +124,28 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: ColorsConstant.greyColor,
                       ),
                     );
+                  }
+                },
+              ),
+              const SizedBox(height: 20),
+              DropdownButton<Locale>(
+                value: _selectedLocale,
+                items: const [
+                  DropdownMenuItem(
+                    value: Locale('en'),
+                    child: Text('English'),
+                  ),
+                  DropdownMenuItem(
+                    value: Locale('vi'),
+                    child: Text('Tiếng Việt'),
+                  ),
+                ],
+                onChanged: (Locale? newLocale) {
+                  if (newLocale != null) {
+                    setState(() {
+                      _selectedLocale = newLocale;
+                    });
+                    context.read<AppBloc>().add(AppChangeLocale(newLocale));
                   }
                 },
               ),

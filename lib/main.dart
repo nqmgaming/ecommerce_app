@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/bloc/app_bloc.dart';
 import 'package:ecommerce_app/core/utils/firebase_api.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/app_page.dart';
 import 'package:ecommerce_app/feature/app/presentation/page/cart/bloc/cart_bloc.dart';
@@ -72,6 +73,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final FirebaseApi _firebaseApi = FirebaseApi();
+  String? _locale;
 
   Future<bool> _checkOnboardingSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -79,10 +81,20 @@ class _MyAppState extends State<MyApp> {
     return seen ?? false;
   }
 
+  Future<String?> _getLocale() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('locale');
+  }
+
   @override
   void initState() {
     super.initState();
     _firebaseApi.initNotifications();
+    _getLocale().then((locale) {
+      setState(() {
+        _locale = locale;
+      });
+    });
   }
 
   @override
@@ -114,28 +126,45 @@ class _MyAppState extends State<MyApp> {
               BlocProvider<NotificationBloc>(
                 create: (context) => getIt<NotificationBloc>(),
               ),
+              BlocProvider(create: (context) => AppBloc()),
             ],
-            child: MaterialApp(
-              localizationsDelegates: const [
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: S.delegate.supportedLocales,
-              locale: const Locale('vi'),
-              theme: ThemeData(
-                appBarTheme: const AppBarTheme(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.white,
-                ),
-              ),
-              debugShowCheckedModeBanner: false,
-              home: widget.isLoggedIn
-                  ? const AppPage()
-                  : (snapshot.hasData && snapshot.data == true
-                      ? const LoginPage()
-                      : const WelcomePage()),
+            child: BlocConsumer<AppBloc, AppState>(
+              listener: (context, state) {
+                if (state is AppLanguageChanged) {
+                  setState(() {
+                    _locale = state.locale.languageCode;
+                  });
+
+                  // save locale to SharedPreferences
+                  SharedPreferences.getInstance().then((prefs) {
+                    prefs.setString('locale', state.locale.languageCode);
+                  });
+                }
+              },
+              builder: (context, state) {
+                return MaterialApp(
+                  localizationsDelegates: const [
+                    S.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: S.delegate.supportedLocales,
+                  locale: Locale(_locale ?? 'en'),
+                  theme: ThemeData(
+                    appBarTheme: const AppBarTheme(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.white,
+                    ),
+                  ),
+                  debugShowCheckedModeBanner: false,
+                  home: widget.isLoggedIn
+                      ? const AppPage()
+                      : (snapshot.hasData && snapshot.data == true
+                          ? const LoginPage()
+                          : const WelcomePage()),
+                );
+              },
             ),
           );
         }
