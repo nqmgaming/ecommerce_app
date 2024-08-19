@@ -21,19 +21,14 @@ class FirebaseApi {
     try {
       await _firebaseMessaging.requestPermission();
 
-      // Ensure APNS token is available
       String? apnsToken = await _firebaseMessaging.getAPNSToken();
       if (apnsToken == null) {
-        // Wait for the APNS token to be set
         await Future.delayed(const Duration(seconds: 2));
         apnsToken = await _firebaseMessaging.getAPNSToken();
       }
 
       if (apnsToken != null) {
-        final fcmToken = await _firebaseMessaging.getToken();
-        print('FCM Token: $fcmToken');
-      } else {
-        print('APNS token is not available.');
+        await _firebaseMessaging.getToken();
       }
     } finally {
       _isRequestingPermission = false;

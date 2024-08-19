@@ -242,6 +242,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     size: 100,
                     color: ColorsConstant.greyColor,
                   ),
+                  const SizedBox(height: 10),
                   Text(
                     delegate.noNotifications,
                     style: const TextStyle(

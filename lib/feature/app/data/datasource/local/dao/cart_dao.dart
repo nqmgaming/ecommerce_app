@@ -35,6 +35,7 @@ class CartDao {
   }
 
   Future<void> deleteCart(String id) async {
+    print('delete cart');
     await _database.delete(
       'Cart',
       where: 'id = ?',
@@ -43,6 +44,7 @@ class CartDao {
   }
 
   Future<void> deleteAllCart(String userId) async {
+    print('delete all cart');
     await _database.delete(
       'Cart',
       where: 'userId = ?',

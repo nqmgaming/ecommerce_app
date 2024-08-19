@@ -26,9 +26,9 @@ final class CartRemoved extends CartState {
 }
 
 final class CartRemovedAll extends CartState {
-  final bool isRemoved;
+  final bool isRemovedAll;
 
-  CartRemovedAll(this.isRemoved);
+  CartRemovedAll(this.isRemovedAll);
 }
 
 final class CartUpdated extends CartState {

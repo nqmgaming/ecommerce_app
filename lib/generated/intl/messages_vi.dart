@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "availableInStock":
             MessageLookupByLibrary.simpleMessage("Có sẵn trong kho"),
         "cartLabel": MessageLookupByLibrary.simpleMessage("Cart"),
+        "cartTitle": MessageLookupByLibrary.simpleMessage("Giỏ hàng"),
         "checkout": MessageLookupByLibrary.simpleMessage("Thanh toán"),
         "deleteNotification": MessageLookupByLibrary.simpleMessage("Xóa"),
         "description": MessageLookupByLibrary.simpleMessage("Mô tả"),
@@ -70,7 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noCategoriesFound":
             MessageLookupByLibrary.simpleMessage("Không tìm thấy danh mục"),
         "noItemsInCart": MessageLookupByLibrary.simpleMessage(
-            "Không có sản phẩm nào trong giỏ hàng"),
+            "Không có sản phẩm nào \ntrong giỏ hàng"),
         "noNotifications":
             MessageLookupByLibrary.simpleMessage("Không có thông báo"),
         "noProductsAvailable":

@@ -360,6 +360,16 @@ class S {
     );
   }
 
+  /// `Cart`
+  String get cartTitle {
+    return Intl.message(
+      'Cart',
+      name: 'cartTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Notifications`
   String get notificationsTitle {
     return Intl.message(

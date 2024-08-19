@@ -31,6 +31,7 @@
   "cartLabel": "Cart",
   "alertLabel": "Alert",
   "profileLabel": "Profile",
+  "cartTitle": "Cart",
   "notificationsTitle": "Notifications",
   "noNotifications": "No notifications",
   "deleteNotification": "Delete",

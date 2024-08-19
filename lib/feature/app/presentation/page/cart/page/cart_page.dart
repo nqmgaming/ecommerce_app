@@ -25,6 +25,7 @@ class _CartPageState extends State<CartPage> {
   int? _userId;
   int _cartLength = 0;
   int _totalPrice = 0;
+  bool _isButtonDisabled = false;
 
   @override
   void initState() {
@@ -48,16 +49,64 @@ class _CartPageState extends State<CartPage> {
     final delegate = S.of(context);
     showDialog(
       context: context,
+      barrierColor: Colors.black.withOpacity(0.5),
       builder: (context) {
         return AlertDialog(
-          title: Text(delegate.orderSuccessfulTitle),
-          content: Text(delegate.orderSuccessfulContent),
+          actionsAlignment: MainAxisAlignment.center,
+          title: Center(
+            child: Column(
+              children: [
+                const Icon(
+                  Icons.check_circle,
+                  color: Colors.green,
+                  size: 50,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  delegate.orderSuccessfulTitle,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          content: Text(
+            delegate.orderSuccessfulContent,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 16,
+              color: ColorsConstant.greyColor,
+            ),
+          ),
+          backgroundColor: ColorsConstant.whiteColor,
+          surfaceTintColor: ColorsConstant.whiteColor,
+          shadowColor: ColorsConstant.blackColor.withOpacity(0.5),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text(delegate.okCaption),
+              style: TextButton.styleFrom(
+                foregroundColor: ColorsConstant.blackColor,
+              ),
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                decoration: BoxDecoration(
+                  color: ColorsConstant.blackColor,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Text(
+                  delegate.okCaption,
+                  style: const TextStyle(
+                    color: ColorsConstant.whiteColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
           ],
         );
@@ -74,22 +123,23 @@ class _CartPageState extends State<CartPage> {
       body: BlocConsumer<CartBloc, CartState>(
         listener: (context, state) {
           if (state is CartLoaded) {
-            setState(() {
-              _cartLength = state.cart.length;
-              _totalPrice = state.cart.fold(
-                0,
-                (previousValue, element) =>
-                    previousValue + (element.productPrice * element.quantity),
-              );
-            });
+            setState(
+              () {
+                _cartLength = state.cart.length;
+                _isButtonDisabled = state.cart.isEmpty;
+                _totalPrice = state.cart.fold(
+                  0,
+                  (previousValue, element) =>
+                      previousValue + (element.productPrice * element.quantity),
+                );
+              },
+            );
           } else if (state is CartError) {
             _showErrorSnackBar(context, state.message);
           } else if (state is CartUpdated || state is CartRemoved) {
             BlocProvider.of<CartBloc>(context).add(GetCart(_userId.toString()));
           } else if (state is CartRemovedAll) {
-            BlocProvider.of<CartBloc>(context)
-                .add(GetCart(_userId.toString()));
-            _showAlertDialog(context);
+            BlocProvider.of<CartBloc>(context).add(GetCart(_userId.toString()));
           }
         },
         buildWhen: (previous, current) => current is CartLoaded,
@@ -102,10 +152,12 @@ class _CartPageState extends State<CartPage> {
                 _buildEmptyCartMessage()
               else
                 const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: ColorsConstant.blackColor,
+                  ),
                 ),
               Positioned(
-                bottom: 10,
+                bottom: 30,
                 right: 10,
                 left: 10,
                 child: Container(
@@ -151,10 +203,13 @@ class _CartPageState extends State<CartPage> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 10),
                         child: ElevatedButton(
-                          onPressed: () {
-                            BlocProvider.of<CartBloc>(context)
-                                .add(ClearCart(_userId.toString()));
-                          },
+                          onPressed: _isButtonDisabled
+                              ? null
+                              : () {
+                                  BlocProvider.of<CartBloc>(context)
+                                      .add(ClearCart(_userId.toString()));
+                                  _showAlertDialog(context);
+                                },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black,
                               shape: RoundedRectangleBorder(
@@ -212,7 +267,7 @@ class _CartPageState extends State<CartPage> {
             )
           : null,
       title: Text(
-        delegate.cartLabel,
+        delegate.cartTitle,
         style: const TextStyle(
           color: ColorsConstant.blackColor,
           fontSize: 20,
@@ -404,8 +459,10 @@ class _CartPageState extends State<CartPage> {
             size: 100,
             color: ColorsConstant.greyColor,
           ),
+          const SizedBox(height: 20),
           Text(
             delegate.noItemsInCart,
+            textAlign: TextAlign.center,
             style:
                 const TextStyle(fontSize: 20, color: ColorsConstant.greyColor),
           ),

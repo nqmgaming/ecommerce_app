@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "availableInStock":
             MessageLookupByLibrary.simpleMessage("Available in stock"),
         "cartLabel": MessageLookupByLibrary.simpleMessage("Cart"),
+        "cartTitle": MessageLookupByLibrary.simpleMessage("Cart"),
         "checkout": MessageLookupByLibrary.simpleMessage("Checkout"),
         "deleteNotification": MessageLookupByLibrary.simpleMessage("Delete"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),

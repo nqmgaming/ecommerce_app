@@ -49,7 +49,14 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: ColorsConstant.whiteColor,
       appBar: AppBar(
-        title: Text(delegate.profilePageTitle),
+        title: Text(
+          delegate.profilePageTitle,
+          style: const TextStyle(
+            color: ColorsConstant.blackColor,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

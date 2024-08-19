@@ -72,6 +72,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   FutureOr<void> _onClearCart(ClearCart event, Emitter<CartState> emit) async {
+    print('clear cart');
     final result = await _deleteAllCart(DeleteAllCartParams(event.userId));
     result.fold(
       (failure) => emit(CartError(failure.message)),

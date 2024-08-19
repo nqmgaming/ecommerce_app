@@ -204,12 +204,23 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ] else if (state is HomeNoResults) ...[
                       Center(
-                        child: Text(
-                          delegate.noCategoriesFound,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 100),
+                            const Icon(
+                              Icons.search_off,
+                              size: 100,
+                              color: ColorsConstant.greyColor,
+                            ),
+                            const SizedBox(height: 20),
+                            Text(
+                              delegate.noCategoriesFound,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
