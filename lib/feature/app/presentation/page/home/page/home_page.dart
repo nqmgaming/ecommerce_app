@@ -47,6 +47,30 @@ class _HomePageState extends State<HomePage> {
     final delegate = S.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        surfaceTintColor: ColorsConstant.whiteColor,
+        leading: IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            CupertinoIcons.line_horizontal_3_decrease,
+            color: ColorsConstant.blackColor,
+          ),
+        ),
+        actions: [
+          Container(
+            margin: const EdgeInsets.all(10),
+            decoration: const BoxDecoration(
+              color: ColorsConstant.blackColor,
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              CupertinoIcons.person_circle,
+              color: ColorsConstant.whiteColor,
+              size: 30,
+            ),
+          )
+        ],
+      ),
       backgroundColor: ColorsConstant.whiteColor,
       body: RefreshIndicator(
         color: ColorsConstant.blackColor,
@@ -75,7 +99,7 @@ class _HomePageState extends State<HomePage> {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
@@ -90,7 +114,8 @@ class _HomePageState extends State<HomePage> {
                                 borderRadius: BorderRadius.circular(40),
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 5, horizontal: 20),
                                 child: TextField(
                                   controller: _searchController,
                                   decoration: InputDecoration(
@@ -114,15 +139,15 @@ class _HomePageState extends State<HomePage> {
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: ColorsConstant.blackColor.withOpacity(0.1),
+                                color:
+                                    ColorsConstant.blackColor.withOpacity(0.1),
                                 blurRadius: 10,
                                 spreadRadius: 1,
                               ),
                             ],
                           ),
                           child: IconButton(
-                            onPressed: () {
-                            },
+                            onPressed: () {},
                             icon: const Icon(
                               Icons.tune,
                               color: ColorsConstant.blackColor,
@@ -165,8 +190,8 @@ class _HomePageState extends State<HomePage> {
                             margin: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: CachedNetworkImageProvider(
-                                    category.image),
+                                image:
+                                    CachedNetworkImageProvider(category.image),
                                 fit: BoxFit.cover,
                               ),
                               borderRadius: BorderRadius.circular(15),
@@ -182,8 +207,7 @@ class _HomePageState extends State<HomePage> {
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(
                                         category.icon,
