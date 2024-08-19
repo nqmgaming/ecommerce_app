@@ -55,7 +55,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           content: Text(message),
           actions: [
             CupertinoDialogAction(
-              child: const Text("OK"),
+              child: const Text(
+                "OK",
+                style: TextStyle(
+                  color: ColorsConstant.blackColor,
+                ),
+              ),
               onPressed: () {
                 onOk();
                 Navigator.pop(context);
@@ -233,14 +238,16 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             icon: Container(
                               padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
-                                color:
-                                    _isFavorite ? ColorsConstant.blackColor : ColorsConstant.whiteColor,
+                                color: _isFavorite
+                                    ? ColorsConstant.blackColor
+                                    : ColorsConstant.whiteColor,
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(
                                 Icons.favorite_border,
-                                color:
-                                    _isFavorite ? ColorsConstant.whiteColor : ColorsConstant.blackColor,
+                                color: _isFavorite
+                                    ? ColorsConstant.whiteColor
+                                    : ColorsConstant.blackColor,
                               ),
                             ),
                             onPressed: () {
